@@ -1,70 +1,71 @@
-alertmanager:
-  ingress:
-    enabled: true
-    hosts:
-      - alertmanager.k3sdemo.lan
-    pathType: "ImplementationSpecific"
-  alertmanagerSpec:
-    storage:
-      volumeClaimTemplate:
-        spec:
-          storageClassName: "local-path"
-          resources:
-            requests:
-              storage: "2Gi"
-grafana:
-  ingress:
+kube-prometheus-stack:
+  alertmanager:
+    ingress:
+      enabled: true
+      hosts:
+        - alertmanager.k3sdemo.lan
+      pathType: "ImplementationSpecific"
+    alertmanagerSpec:
+      storage:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: "local-path"
+            resources:
+              requests:
+                storage: "2Gi"
+  grafana:
+    ingress:
+      enabled: "true"
+      hosts:
+        - grafana.k3sdemo.lan
+    additionalDataSources:
+      - name: "loki"
+        access: "proxy"
+        orgId: "1"
+        type: "loki"
+        url: "http://loki.loki.svc.cluster.local:3100"
+        version: "1"
+    adminPassword: "admin"
+    grafana.ini:
+      users:
+        viewers_can_edit: "false"
+      auth:
+        disable_login_form: "false"
+        disable_signout_menu: "true"
+        anonymous:
+          enabled: "true"
+          org_role: "Viewer"
+  kubeApiServer:
     enabled: "true"
-    hosts:
-      - grafana.k3sdemo.lan
-  additionalDataSources:
-    - name: "loki"
-      access: "proxy"
-      orgId: "1"
-      type: "loki"
-      url: "http://loki.loki.svc.cluster.local:3100"
-      version: "1"
-  adminPassword: "admin"
-  grafana.ini:
-    users:
-      viewers_can_edit: "false"
-    auth:
-      disable_login_form: "false"
-      disable_signout_menu: "true"
-      anonymous:
-        enabled: "true"
-        org_role: "Viewer"
-kubeApiServer:
-  enabled: "true"
-kubeControllerManager:
-  enabled: "false"
-kubeDns:
-  enabled: "false"
-kubeEtcd:
-  enabled: "false"
-kubelet:
-  enabled: "true"
-kubeProxy:
-  enabled: "false"
-kubeScheduler:
-  enabled: "false"
-prometheus:
-  ingress:
+  kubeControllerManager:
+    enabled: "false"
+  kubeDns:
+    enabled: "false"
+  kubeEtcd:
+    enabled: "false"
+  kubelet:
     enabled: "true"
-    hosts:
-      - prometheus.k3sdemo.lan
-    pathType: "ImplementationSpecific"
-  prometheusSpec:
-    storageSpec:
-      volumeClaimTemplate:
-        spec:
-          storageClassName: "local-path"
-          resources:
-            requests:
-              storage: "12Gi"
-prometheusOperator:
-  admissionWebhooks:
-    failurePolicy: "Ignore"
-  prometheusSpec:
-    retention: "14d"
-    retentionSize: "10GB"
+  kubeProxy:
+    enabled: "false"
+  kubeScheduler:
+    enabled: "false"
+  prometheus:
+    ingress:
+      enabled: "true"
+      hosts:
+        - prometheus.k3sdemo.lan
+      pathType: "ImplementationSpecific"
+    prometheusSpec:
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: "local-path"
+            resources:
+              requests:
+                storage: "12Gi"
+  prometheusOperator:
+    admissionWebhooks:
+      failurePolicy: "Ignore"
+    prometheusSpec:
+      retention: "14d"
+      retentionSize: "10GB"
