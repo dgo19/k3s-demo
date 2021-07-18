@@ -61,6 +61,7 @@ In case of a single ubuntu VM, you add the required subdomains to /etc/hosts
 sudo sed -i '/^127.0.0.1/ s/$/ my-webserver\.k3sdemo\.lan/' /etc/hosts
 ```
 ## Installation of ingress nginx
+```
 $ git clone https://github.com/dgo19/k3s-demo.git
 $ cd k3s-demo/applications/ingress-nginx
 $ kubectl apply -k .
