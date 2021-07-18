@@ -9,79 +9,9 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    chart: kube-prometheus-stack
-    helm:
-      parameters:
-      - name: alertmanager.ingress.enabled
-        value: "true"
-      - name: alertmanager.ingress.hosts
-        value: "{alertmanager.k3sdemo.lan}"
-      - name: alertmanager.ingress.pathType
-        value: "ImplementationSpecific"
-      - name: alertmanager.alertmanagerSpec.storage.volumeClaimTemplate.spec.storageClassName
-        value: "local-path"
-      - name: alertmanager.alertmanagerSpec.storage.volumeClaimTemplate.spec.resources.requests.storage
-        value: "2Gi"
-      - name: grafana.ingress.enabled
-        value: "true"
-      - name: grafana.ingress.hosts
-        value: "{grafana.k3sdemo.lan}"
-      - name: grafana.additionalDataSources[0].name
-        value: "loki"
-      - name: grafana.additionalDataSources[0].access
-        value: "proxy"
-      - name: grafana.additionalDataSources[0].orgId
-        value: "1"
-      - name: grafana.additionalDataSources[0].type
-        value: "loki"
-      - name: grafana.additionalDataSources[0].url
-        value: "http://loki.loki.svc.cluster.local:3100"
-      - name: grafana.additionalDataSources[0].version
-        value: "1"
-      - name: grafana.adminPassword
-        value: "admin"
-      - name: grafana.grafana\.ini.users.viewers_can_edit
-        value: "false"
-      - name: grafana.grafana\.ini.auth.disable_login_form
-        value: "false"
-      - name: grafana.grafana\.ini.auth.disable_signout_menu
-        value: "true"
-      - name: grafana.grafana\.ini.auth\.anonymous.enabled
-        value: "true"
-      - name: grafana.grafana\.ini.auth\.anonymous.org_role
-        value: Viewer
-      - name: kubeApiServer.enabled
-        value: "true"
-      - name: kubeControllerManager.enabled
-        value: "false"
-      - name: kubeDns.enabled
-        value: "false"
-      - name: kubeEtcd.enabled
-        value: "false"
-      - name: kubelet.enabled
-        value: "true"
-      - name: kubeProxy.enabled
-        value: "false"
-      - name: kubeScheduler.enabled
-        value: "false"
-      - name: prometheus.ingress.enabled
-        value: "true"
-      - name: prometheus.ingress.hosts
-        value: "{prometheus.k3sdemo.lan}"
-      - name: prometheus.ingress.pathType
-        value: "ImplementationSpecific"
-      - name: prometheus.prometheusSpec.storageSpec.volumeClaimTemplate.spec.storageClassName
-        value: "local-path"
-      - name: prometheus.prometheusSpec.storageSpec.volumeClaimTemplate.spec.resources.requests.storage
-        value: "12Gi"
-      - name: prometheusOperator.admissionWebhooks.failurePolicy
-        value: "Ignore"
-      - name: prometheus.prometheusSpec.retention
-        value: "14d"
-      - name: prometheus.prometheusSpec.retentionSize
-        value: "10GB"
-    repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 15.2.0
+    path: applications/monitoring
+    repoURL: https://github.com/dgo19/k3s-demo.git
+    targetRevision: HEAD
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
