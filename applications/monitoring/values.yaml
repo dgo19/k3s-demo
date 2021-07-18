@@ -70,6 +70,5 @@ kube-prometheus-stack:
       retention: "14d"
       retentionSize: "10GB"
   defaultRules:
-    create: false
     rules:
       kubeScheduler: false
