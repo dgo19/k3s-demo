@@ -2,7 +2,7 @@ alertmanager:
   ingress:
     enabled: true
     hosts:
-      - "alertmanager.k3sdemo.lan"
+      - alertmanager.k3sdemo.lan
     pathType: "ImplementationSpecific"
   alertmanagerSpec:
     storage:
@@ -16,7 +16,7 @@ grafana:
   ingress:
     enabled: "true"
     hosts:
-      - "grafana.k3sdemo.lan"
+      - grafana.k3sdemo.lan
   additionalDataSources:
     - name: "loki"
       access: "proxy"
@@ -52,7 +52,7 @@ prometheus:
   ingress:
     enabled: "true"
     hosts:
-      - "prometheus.k3sdemo.lan"
+      - prometheus.k3sdemo.lan
     pathType: "ImplementationSpecific"
   prometheusSpec:
     storageSpec:
