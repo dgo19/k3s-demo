@@ -38,7 +38,7 @@ spec:
         value: "http://loki.loki.svc.cluster.local:3100"
       - name: grafana.additionalDataSources[0].version
         value: "1"
-      - name grafana.adminPassword
+      - name: grafana.adminPassword
         value: "admin"
       - name: grafana.grafana\.ini.users.viewers_can_edit
         value: "false"
