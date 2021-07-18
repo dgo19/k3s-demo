@@ -10,6 +10,6 @@ spec:
   project: default
   source:
     path: applications/test-my-webserver
-    repoURL: https://github.com/dgo19/k8s-demo.git
+    repoURL: https://github.com/dgo19/k3s-demo.git
     targetRevision: HEAD
   syncPolicy: {}

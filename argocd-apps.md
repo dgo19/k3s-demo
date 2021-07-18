@@ -30,7 +30,7 @@ $ argocd app diff applications
 >   project: default
 >   source:
 >     path: applications/configmaps
->     repoURL: https://github.com/dgo19/k8s-demo.git
+>     repoURL: https://github.com/dgo19/k3s-demo.git
 >     targetRevision: HEAD
 >   syncPolicy: {}
 ===== argoproj.io/Application argocd/ingress-nginx ======
@@ -49,7 +49,7 @@ $ argocd app diff applications
 >   project: default
 >   source:
 >     path: applications/ingress-nginx
->     repoURL: https://github.com/dgo19/k8s-demo.git
+>     repoURL: https://github.com/dgo19/k3s-demo.git
 >     targetRevision: HEAD
 >   syncPolicy: {}
 ===== argoproj.io/Application argocd/mariadb-ephemeral ======
