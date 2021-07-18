@@ -34,6 +34,9 @@ patchesStrategicMerge:
 resources:
   - ingress-argocd.yaml
   - namespace-argocd.yaml
+  - servicemonitor-argocd-metrics.yaml
+  - servicemonitor-argocd-server-metrics.yaml
+  - servicemonitor-argocd-repo-server-metrics.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
