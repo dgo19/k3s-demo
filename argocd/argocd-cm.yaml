@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  repositories: |
+    - name: dgo19-k3s-demo
+      type: git
+      url: https://github.com/dgo19/k3s-demo.git
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+
