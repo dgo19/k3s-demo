@@ -4,7 +4,7 @@ metadata:
   name: ingress-configmap-web
 spec:
   rules:
-  - host: configmap-web.microk8s.local
+  - host: configmap-web.k3sdemo.lan
     http:
       paths:
       - path: /
