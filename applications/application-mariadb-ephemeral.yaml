@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mariadb-ephemeral
+  namespace: argocd
+spec:
+  destination:
+    namespace: mariadb-ephemeral
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: applications/mariadb-ephemeral
+    repoURL: https://github.com/dgo19/k8s-demo.git
+    targetRevision: HEAD
+  syncPolicy: {}

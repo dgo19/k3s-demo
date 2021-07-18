@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: mariadb-ephemeral
+
+resources:
+  - deployment-mariadb-ephemeral.yaml
+  - deployment-phpmyadmin.yaml
+  - ingress-phpmyadmin.yaml
+  - namespace-mariadb-ephemeral.yaml
+  - service-mariadb.yaml
+  - service-phpmyadmin.yaml
+
+configMapGenerator:
+  - name: mariadb-conf
+    literals:
+      - mysql-database=testdb
+  - name: phpmyadmin-conf
+    literals:
+      - pma-host=mariadb
+
+secretGenerator:
+  - name: mariadb-secret
+    literals:
+      - mysql-root-password=rootpassword
+      - mysql-user=testuser
+      - mysql-password=greatpassword
+
+generatorOptions:
+  disableNameSuffixHash: true

@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx
+  namespace: argocd
+spec:
+  destination:
+    namespace: ingress-nginx
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: applications/ingress-nginx
+    repoURL: https://github.com/dgo19/k8s-demo.git
+    targetRevision: HEAD
+  syncPolicy: {}

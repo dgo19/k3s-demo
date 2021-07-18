@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mariadb-pv
+  namespace: argocd
+spec:
+  destination:
+    namespace: mariadb-pv
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: applications/mariadb-pv
+    repoURL: https://github.com/dgo19/k8s-demo.git
+    targetRevision: HEAD
+  syncPolicy: {}
