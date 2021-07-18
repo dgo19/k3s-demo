@@ -32,6 +32,10 @@ Get kustomize
 $ mkdir ~/bin
 $ curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.2.0/kustomize_v4.2.0_linux_amd64.tar.gz | tar xvzC ~/bin -f -
 ```
+Get Helm
+```
+$ curl -L https://get.helm.sh/helm-v3.6.3-linux-amd64.tar.gz | tar xvzC ~/bin --strip-components 1 -f - linux-amd64/helm
+```
 Re-enter user session.
 
 ## Wildcard DNS for ingress
@@ -60,9 +64,12 @@ In case of a single ubuntu VM, you add the required subdomains to /etc/hosts
 ```
 sudo sed -i '/^127.0.0.1/ s/$/ my-webserver\.k3sdemo\.lan/' /etc/hosts
 ```
-## Installation of ingress nginx
+## Clone git Repo
 ```
 $ git clone https://github.com/dgo19/k3s-demo.git
+```
+## Installation of ingress nginx
+```
 $ cd k3s-demo/applications/ingress-nginx
 $ kubectl apply -k .
 namespace/ingress-nginx created
@@ -182,4 +189,44 @@ $ curl -kv https://localhost
 </body>
 </html>
 * Connection #0 to host localhost left intact
+```
+## Installation of kube-prometheus-stack for monitoring
+```
+$ cd k3s-demo/applications/monitoring
+$ helm install --dependency-update monitoring . -n monitoring --create-namespace
+W0718 20:04:32.742398  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:32.743791  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:32.744975  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:32.746212  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:32.747503  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:32.748662  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:32.749832  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:32.999991  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:33.100576  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:34.668566  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:34.706017  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:34.706484  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:34.706644  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:34.707124  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:34.708312  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:34.708953  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:34.709917  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:36.433685  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:36.590896  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+W0718 20:04:44.871114  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+NAME: monitoring
+LAST DEPLOYED: Sun Jul 18 20:04:31 2021
+NAMESPACE: monitoring
+STATUS: deployed
+REVISION: 1
+```
+```
+$ kubectl -n monitoring get pods
+NAME                                                     READY   STATUS    RESTARTS   AGE
+monitoring-kube-prometheus-operator-656bdb8465-92hbb     1/1     Running   0          4m59s
+monitoring-prometheus-node-exporter-zsddb                1/1     Running   0          4m59s
+monitoring-grafana-685d8776c7-5qhzv                      2/2     Running   0          4m59s
+alertmanager-monitoring-kube-prometheus-alertmanager-0   2/2     Running   0          4m58s
+prometheus-monitoring-kube-prometheus-prometheus-0       2/2     Running   1          4m58s
+monitoring-kube-state-metrics-85d69795b9-4x9s6           1/1     Running   0          4m59s
 ```
