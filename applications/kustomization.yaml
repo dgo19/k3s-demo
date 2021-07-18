@@ -6,5 +6,6 @@ resources:
   - application-ingress-nginx.yaml
   - application-mariadb-ephemeral.yaml
   - application-mariadb-pv.yaml
+  - application-monitoring.yaml
   - application-postgres-operator.yaml
   - application-test-my-webserver.yaml
