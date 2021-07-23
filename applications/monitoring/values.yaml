@@ -53,6 +53,8 @@ kube-prometheus-stack:
           gnetId: 12611
           revison: 1
           datasource: loki
+    plugins:
+      - grafana-piechart-panel
   kubeApiServer:
     enabled: "true"
   kubeControllerManager:
