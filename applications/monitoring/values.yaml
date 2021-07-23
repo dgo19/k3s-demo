@@ -53,6 +53,10 @@ kube-prometheus-stack:
           gnetId: 12611
           revison: 1
           datasource: loki
+        ArgoCD:
+          gnetId: 14584
+          revision: 1
+          datasource: default
     plugins:
       - grafana-piechart-panel
   kubeApiServer:
