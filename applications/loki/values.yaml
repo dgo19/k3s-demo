@@ -1,0 +1,10 @@
+loki-stack:
+  loki:
+    persistence:
+      enabled: "true"
+      size: "20Gi"
+      storageClassName: "local-path"
+    serviceMonitor:
+      enabled: "true"
+      additionalLabels:
+        release: "monitoring"

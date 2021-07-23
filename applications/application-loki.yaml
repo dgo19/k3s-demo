@@ -9,21 +9,9 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    chart: loki-stack
-    repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 2.3.1
-    helm:
-      parameters:
-      - name: loki.persistence.enabled
-        value: "true"
-      - name: loki.persistence.size
-        value: "20Gi"
-      - name: loki.serviceMonitor.enabled
-        value: "true"
-      - name: loki.serviceMonitor.additionalLabels.release
-        value: 'monitoring'
-      - name: loki.persistence.storageClassName
-        value: "local-path"
+    path: applications/loki
+    repoURL: https://github.com/dgo19/k3s-demo.git
+    targetRevision: HEAD
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
