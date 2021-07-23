@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - application-configmaps.yaml
   - application-ingress-nginx.yaml
+  - application-loki.yaml
   - application-mariadb-ephemeral.yaml
   - application-mariadb-pv.yaml
   - application-monitoring.yaml
