@@ -37,10 +37,10 @@ kube-prometheus-stack:
           org_role: "Viewer"
     dashboards:
       default:
-      Logging:
-        gnetId: 12611
-        revison: 1
-        datasource: loki
+        Logging:
+          gnetId: 12611
+          revison: 1
+          datasource: loki
   kubeApiServer:
     enabled: "true"
   kubeControllerManager:
