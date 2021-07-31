@@ -6,7 +6,7 @@ spec:
   teamId: "acid"
   volume:
     size: 1Gi
-    storageclass: local-path
+    storageClass: local-path
   numberOfInstances: 1
   users:
     keycloak:  # database owner
