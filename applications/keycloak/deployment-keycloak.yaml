@@ -22,6 +22,8 @@ spec:
           value: "admin"
         - name: KEYCLOAK_PASSWORD
           value: "admin"
+        - name: KEYCLOAK_STATISTICS
+          value: "all"
         - name: PROXY_ADDRESS_FORWARDING
           value: "true"
         - name: DB_VENDOR
