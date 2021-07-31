@@ -9,5 +9,5 @@ spec:
     matchLabels:
       app: keycloak-mgmt
   endpoints:
-  - port: 9990
+  - port: mgmt
     path: /metrics

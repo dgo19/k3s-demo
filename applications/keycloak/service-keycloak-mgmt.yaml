@@ -6,9 +6,9 @@ metadata:
     app: keycloak-mgmt
 spec:
   ports:
-  - name: http
-    port: "9990"
-    targetPort: "9990"
+  - name: mgmt
+    port: 9990
+    targetPort: 9990
   selector:
     app: keycloak
   type: ClusterIP
