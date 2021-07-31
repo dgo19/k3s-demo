@@ -1,0 +1,18 @@
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
+metadata:
+  name: acid-minimal-cluster
+spec:
+  teamId: "acid"
+  volume:
+    size: 1Gi
+    storageclass: local-path
+  numberOfInstances: 1
+  users:
+    keycloak:  # database owner
+    - superuser
+    - createdb
+  databases:
+    keycloak: keycloak  # dbname: owner
+  postgresql:
+    version: "11"

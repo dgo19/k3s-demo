@@ -5,3 +5,4 @@ namespace: keycloak
 
 resources:
   - namespace-keycloak.yaml
+  - postgresql-acid-minimal-cluster.yaml
