@@ -4,5 +4,8 @@ kind: Kustomization
 namespace: keycloak
 
 resources:
+  - deployment-keycloak.yaml
+  - ingress-keycloak.yaml
   - namespace-keycloak.yaml
   - postgresql-acid-minimal-cluster.yaml
+  - service-keycloak.yaml

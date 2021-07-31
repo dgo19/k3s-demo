@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-keycloak
+spec:
+  rules:
+  - host: keycloak.k3sdemo.lan
+    http:
+      paths:
+      - backend:
+          serviceName: keycloak
+          servicePort: 8080
