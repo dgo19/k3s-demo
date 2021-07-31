@@ -9,3 +9,5 @@ resources:
   - namespace-keycloak.yaml
   - postgresql-acid-minimal-cluster.yaml
   - service-keycloak.yaml
+  - service-keycloak-mgmt.yaml
+  - servicemonitor-keycloak-metrics.yaml

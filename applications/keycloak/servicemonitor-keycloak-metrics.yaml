@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: keycloak-metrics
+  labels:
+    release: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: keycloak-mgmt
+  endpoints:
+  - port: 9990
+    path: /metrics
