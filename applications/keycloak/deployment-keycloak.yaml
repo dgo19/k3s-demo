@@ -14,6 +14,13 @@ spec:
       labels:
         app: keycloak
     spec:
+      initContainers:
+      - name: init
+        image: alpine
+        command: ['sh', '-c', 'wget -o /deployments/keycloak-metrics-spi.jar https://github.com/aerogear/keycloak-metrics-spi/releases/download/2.4.0/keycloak-metrics-spi-2.4.0.jar && touch /deployments/keycloak-metrics-spi.jar.dodeploy']
+        volumeMounts:
+          - mountPath: /deployments
+            name: deployments
       containers:
       - name: keycloak
         image: quay.io/keycloak/keycloak:15.0.0
@@ -45,13 +52,6 @@ spec:
         volumeMounts:
         - mountPath: /opt/jboss/keycloak/standalone/deployments/
           name: deployments
-      initContainers:
-      - name: init
-        image: alpine
-        command: ['sh', '-c', 'wget -o /deployments/keycloak-metrics-spi.jar https://github.com/aerogear/keycloak-metrics-spi/releases/download/2.4.0/keycloak-metrics-spi-2.4.0.jar && touch /deployments/keycloak-metrics-spi.jar.dodeploy']
-        volumeMounts:
-          - mountPath: /deployments
-            name: deployments
         ports:
         - name: http
           containerPort: 8080
