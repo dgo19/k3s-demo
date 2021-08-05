@@ -10,4 +10,5 @@ resources:
   - application-mariadb-pv.yaml
   - application-monitoring.yaml
   - application-postgres-operator.yaml
+  - application-starboard.yaml
   - application-test-my-webserver.yaml
