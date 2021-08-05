@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+  labels:
+    {{- include "starboard-operator.labels" . | nindent 4 }}
+    release: monitoring
+  name: {{ include "starboard-operator.fullname" . }}
+spec:
+  endpoints:
+  - port: metrics
+  selector:
+    {{- include "starboard-operator.selectorLabels" . | nindent 4 }}
