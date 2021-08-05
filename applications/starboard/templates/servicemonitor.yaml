@@ -5,9 +5,10 @@ metadata:
   labels:
     {{- include "starboard-operator.labels" . | nindent 4 }}
     release: monitoring
-  name: {{ include "starboard-operator.fullname" . }}
+  name: {{ include "starboard.starboard-operator.fullname" . }}
 spec:
   endpoints:
   - port: metrics
   selector:
-    {{- include "starboard-operator.selectorLabels" . | nindent 4 }}
+    matchLabels:
+      {{- include "starboard.starboard-operator.selectorLabels" . | nindent 6 }}
