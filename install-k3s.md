@@ -103,8 +103,18 @@ service/sealed-secrets-controller created
 deployment.apps/sealed-secrets-controller created
 ```
 ## Installation of ingress nginx
+Trust Ingress Certificate
 ```
 $ cd k3s-demo/applications/ingress-nginx
+$ sudo cp tls.crt /usr/local/share/ca-certificates/k3sdemo.lan.crt
+$ sudo update-ca-certificates
+Updating certificates in /etc/ssl/certs...
+1 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+```
+Install ingress nginx
+```
 $ kubectl apply -k .
 namespace/ingress-nginx created
 serviceaccount/ingress-nginx created
@@ -118,7 +128,7 @@ rolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
 clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx created
 clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
 configmap/ingress-nginx-controller created
-secret/tls-secret created
+sealedsecret/tls-secret created
 service/ingress-nginx-controller created
 service/ingress-nginx-controller-admission created
 deployment.apps/ingress-nginx-controller created
