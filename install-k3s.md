@@ -36,6 +36,11 @@ Get Helm
 ```
 $ curl -L https://get.helm.sh/helm-v3.6.3-linux-amd64.tar.gz | tar xvzC ~/bin --strip-components 1 -f - linux-amd64/helm
 ```
+Get kubeseal
+```
+$ curl -L https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.16.0/kubeseal-linux-amd64 > ~/bin/kubeseal
+$ chmod +x ~/bin/kubeseal
+```
 Re-enter user session.
 
 ## Wildcard DNS for ingress
@@ -67,6 +72,35 @@ sudo sed -i '/^127.0.0.1/ s/$/ my-webserver\.k3sdemo\.lan/' /etc/hosts
 ## Clone git Repo
 ```
 $ git clone https://github.com/dgo19/k3s-demo.git
+```
+## Installation of sealed-secrets
+```
+$ cd k3s-demo/applications/sealed-secrets
+$ kubectl create namespace sealed-secrets
+namespace/sealed-secrets created
+$ kubectl -n sealed-secrets create secret tls sealed-secrets-key --cert=sealed-secrets.crt --key=sealed-secrets.key
+secret/sealed-secrets-key created
+$ kubectl -n sealed-secrets label secret sealed-secrets-key sealedsecrets.bitnami.com/sealed-secrets-key=active
+secret/sealed-secrets-key labeled
+$ kubectl -n sealed-secrets get secrets --show-labels
+NAME                  TYPE                                  DATA   AGE   LABELS
+default-token-66t9s   kubernetes.io/service-account-token   3      23s   <none>
+sealed-secrets-key    kubernetes.io/tls                     2      14s   sealedsecrets.bitnami.com/sealed-secrets-key=active
+$ kubectl apply -k .
+customresourcedefinition.apiextensions.k8s.io/sealedsecrets.bitnami.com unchanged
+serviceaccount/sealed-secrets-controller created
+Warning: rbac.authorization.k8s.io/v1beta1 Role is deprecated in v1.17+, unavailable in v1.22+; use rbac.authorization.k8s.io/v1 Role
+role.rbac.authorization.k8s.io/sealed-secrets-key-admin created
+role.rbac.authorization.k8s.io/sealed-secrets-service-proxier created
+Warning: rbac.authorization.k8s.io/v1beta1 ClusterRole is deprecated in v1.17+, unavailable in v1.22+; use rbac.authorization.k8s.io/v1 ClusterRole
+clusterrole.rbac.authorization.k8s.io/secrets-unsealer created
+Warning: rbac.authorization.k8s.io/v1beta1 RoleBinding is deprecated in v1.17+, unavailable in v1.22+; use rbac.authorization.k8s.io/v1 RoleBinding
+rolebinding.rbac.authorization.k8s.io/sealed-secrets-controller created
+rolebinding.rbac.authorization.k8s.io/sealed-secrets-service-proxier created
+Warning: rbac.authorization.k8s.io/v1beta1 ClusterRoleBinding is deprecated in v1.17+, unavailable in v1.22+; use rbac.authorization.k8s.io/v1 ClusterRoleBinding
+clusterrolebinding.rbac.authorization.k8s.io/sealed-secrets-controller created
+service/sealed-secrets-controller created
+deployment.apps/sealed-secrets-controller created
 ```
 ## Installation of ingress nginx
 ```

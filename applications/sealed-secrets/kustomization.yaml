@@ -8,3 +8,6 @@ bases:
 
 patchesStrategicMerge:
   - deployment-sealed-secrets-controller.yaml
+
+resources:
+  - ingress-sealed-secrets.yaml
