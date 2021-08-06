@@ -5,3 +5,6 @@ namespace: sealed-secrets
 
 bases:
   - https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.16.0/controller.yaml
+
+patchesStrategicMerge:
+  - deployment-sealed-secrets-controller.yaml
