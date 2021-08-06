@@ -6,22 +6,6 @@ bases:
 
 namespace: argocd
 
-secretGenerator:
-  - name: argocd-secret
-    behavior: merge
-#    files:
-#      - tls.key
-#      - tls.crt
-    literals:
-### create hash: htpasswd -bnBC 10 "" password | tr -d ':\n'
-      - admin.password=$2y$10$KCUOEvfMR6/zTjiB4yDI0eyU3Oyul9DeDkcpKZZhW3wEHKmw1SZwa
-      - admin.passwordMtime=2000-01-01T00:00:00Z
-    type: Opaque
-#  - name: github-key
-#    files:
-#      - sshPrivateKey
-#    type: Opaque
-
 #configMapGenerator:
 #  - name: argocd-ssh-known-hosts-cm
 #    behavior: replace
@@ -34,6 +18,7 @@ patchesStrategicMerge:
 resources:
   - ingress-argocd.yaml
   - namespace-argocd.yaml
+  - sealedsecret-argocd-secret.yaml
   - servicemonitor-argocd-metrics.yaml
   - servicemonitor-argocd-server-metrics.yaml
   - servicemonitor-argocd-repo-server-metrics.yaml
