@@ -8,6 +8,7 @@ resources:
   - deployment-phpmyadmin.yaml
   - ingress-phpmyadmin.yaml
   - namespace-mariadb-ephemeral.yaml
+  - sealedsecret-mariadb-secret.yaml
   - service-mariadb.yaml
   - service-phpmyadmin.yaml
 
@@ -18,13 +19,6 @@ configMapGenerator:
   - name: phpmyadmin-conf
     literals:
       - pma-host=mariadb
-
-secretGenerator:
-  - name: mariadb-secret
-    literals:
-      - mysql-root-password=rootpassword
-      - mysql-user=testuser
-      - mysql-password=greatpassword
 
 generatorOptions:
   disableNameSuffixHash: true
