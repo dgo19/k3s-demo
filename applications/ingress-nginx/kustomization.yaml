@@ -6,16 +6,11 @@ bases:
 
 namespace: ingress-nginx
 
-secretGenerator:
-  - name: tls-secret
-    namespace: ingress-nginx
-    files:
-      - tls.crt
-      - tls.key
-    type: Opaque
-
 patches:
    - deployment-ingress-nginx-controller.yaml
+
+resources:
+  - sealedsecret-tls-secret.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
