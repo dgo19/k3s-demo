@@ -1,4 +1,4 @@
-# microk8s walkthrough - my-webserver
+# k3s-demo walkthrough - my-webserver
 
 Create namespace and deployment for nginx
 ``` 

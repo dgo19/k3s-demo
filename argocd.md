@@ -82,7 +82,7 @@ $ curl -L -o ~/bin/argocd https://github.com/argoproj/argo-cd/releases/download/
 100 85.3M  100 85.3M    0     0   9.8M      0  0:00:08  0:00:08 --:--:-- 11.3M
 $ chmod +x ~/bin/argocd 
 ```
-Open the web-ui (https://argocd.microk8s.local/) or login by command line client.
+Open the web-ui (https://argocd.k3sdemo.lan/) or login by command line client.
 The following tasks can be done by cli or web ui.
 ```
 $ argocd login --insecure --username admin --password admin argocd.k3sdemo.lan
