@@ -23,7 +23,7 @@ Copy credentials for kubectl and set alias for kubectl
 ```
 $ mkdir ~/.kube
 $ sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
-$ sudo chown ${ID} ~/.kube/config
+$ sudo chown ${UID} ~/.kube/config
 $ echo "alias kubectl='k3s kubectl'" >> ~/.bashrc
 $ echo "export KUBECONFIG=~/.kube/config" >> ~/.bashrc
 $ echo 'source <(k3s kubectl completion bash)' >> ~/.bashrc

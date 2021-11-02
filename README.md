@@ -2,9 +2,13 @@
 
 ## Requirements
 - linux distribution
+- 20 GB in /var
+- 6 GB RAM
+- 2 Cores
 - addition packages
   - curl
   - git
+  - sudo
 
 [Installation of k3s](install-k3s.md)
 
