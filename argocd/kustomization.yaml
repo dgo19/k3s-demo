@@ -6,11 +6,11 @@ bases:
 
 namespace: argocd
 
-#configMapGenerator:
-#  - name: argocd-ssh-known-hosts-cm
-#    behavior: replace
-#    files:
-#      - ssh_known_hosts
+configMapGenerator:
+  - name: argocd-ssh-known-hosts-cm
+    behavior: replace
+    files:
+      - ssh_known_hosts
 
 patchesStrategicMerge:
   - argocd-cm.yaml
