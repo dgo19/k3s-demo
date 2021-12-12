@@ -7,5 +7,5 @@ appVersion: "1.0"
 
 dependencies:
 - name: starboard-operator
-  version: 0.13.1
+  version: v0.13.1
   repository: https://aquasecurity.github.io/helm-charts/
