@@ -1,4 +1,8 @@
 ## Configmap - Webserver example
+In case of a single ubuntu VM, add the required subdomain to /etc/hosts
+```
+sudo sed -i '/^127.0.0.1/ s/$/ configmap-web\.k3sdemo\.lan/' /etc/hosts
+```
 create namespace for configmap tests
 ```
 $ kubectl create namespace configmaps
@@ -211,9 +215,9 @@ $ kubectl delete namespace configmaps
 namespace "configmaps" deleted
 ```
 Review the contents of the directory k3s-demo/applications/configmaps/
-The configMapGenerator of kustomize will be used to create the configmap. It will encode the contents in base64, if required.
+The configMapGenerator of kustomize will be used to create the configmap.
 ```
-$ cd k3s-demo/applications/configmaps/
+$ cd ~/k3s-demo/applications/configmaps/
 $ ls -l index.html 
 -rw-rw-r-- 1 dgo dgo 667 Mai 15 16:13 index.html
 $ cat kustomization.yaml 

@@ -72,11 +72,12 @@ sudo sed -i '/^127.0.0.1/ s/$/ my-webserver\.k3sdemo\.lan/' /etc/hosts
 ```
 ## Clone git Repo
 ```
-$ git clone https://github.com/dgo19/k3s-demo.git
+$ git clone https://github.com/dgo19/k3s-demo.git ~/k3s-demo
 ```
 ## Installation of sealed-secrets
+Create the namespace for sealed-secrets, the secret for the sealed-secrets key and the needed label.
 ```
-$ cd k3s-demo/applications/sealed-secrets
+$ cd ~/k3s-demo/applications/sealed-secrets
 $ kubectl create namespace sealed-secrets
 namespace/sealed-secrets created
 $ kubectl -n sealed-secrets create secret tls sealed-secrets-key --cert=sealed-secrets.crt --key=sealed-secrets.key
@@ -87,6 +88,9 @@ $ kubectl -n sealed-secrets get secrets --show-labels
 NAME                  TYPE                                  DATA   AGE   LABELS
 default-token-66t9s   kubernetes.io/service-account-token   3      23s   <none>
 sealed-secrets-key    kubernetes.io/tls                     2      14s   sealedsecrets.bitnami.com/sealed-secrets-key=active
+```
+Deploy sealed-secrets.
+```
 $ kubectl apply -k .
 customresourcedefinition.apiextensions.k8s.io/sealedsecrets.bitnami.com unchanged
 serviceaccount/sealed-secrets-controller created
@@ -106,7 +110,7 @@ deployment.apps/sealed-secrets-controller created
 ## Installation of ingress nginx
 Trust Ingress Certificate
 ```
-$ cd k3s-demo/applications/ingress-nginx
+$ cd ~/k3s-demo/applications/ingress-nginx
 $ sudo cp tls.crt /usr/local/share/ca-certificates/k3sdemo.lan.crt
 $ sudo update-ca-certificates
 Updating certificates in /etc/ssl/certs...
@@ -136,7 +140,9 @@ deployment.apps/ingress-nginx-controller created
 job.batch/ingress-nginx-admission-create created
 job.batch/ingress-nginx-admission-patch created
 validatingwebhookconfiguration.admissionregistration.k8s.io/ingress-nginx-admission created
-
+```
+Check for running pods. This can take a few minutes to complete.
+```
 $ kubectl -n ingress-nginx get pods
 NAME                                       READY   STATUS      RESTARTS   AGE
 ingress-nginx-admission-create-mjf8k       0/1     Completed   0          86s
@@ -237,7 +243,7 @@ $ curl -kv https://localhost
 ```
 ## Installation of kube-prometheus-stack for monitoring
 ```
-$ cd k3s-demo/applications/monitoring
+$ cd ~/k3s-demo/applications/monitoring
 $ helm install --dependency-update monitoring . -n monitoring --create-namespace
 W0718 20:04:32.742398  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
 W0718 20:04:32.743791  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
@@ -265,6 +271,7 @@ NAMESPACE: monitoring
 STATUS: deployed
 REVISION: 1
 ```
+Check for running pods. This can take a few minutes to complete.
 ```
 $ kubectl -n monitoring get pods
 NAME                                                     READY   STATUS    RESTARTS   AGE

@@ -1,7 +1,7 @@
 # Argo CD - Applications
 Deploy root application:
 ```
-$ cd k3s-demo/applications/
+$ cd ~/k3s-demo/applications/
 $ kubectl apply -f applications.yaml
 application.argoproj.io/applications created
 ```

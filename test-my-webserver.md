@@ -448,7 +448,7 @@ namespace "test" deleted
 ``` 
 Create my-webserver by using kustomize build. Examples at applications/test-my-webserver
 ``` 
-$ cd k3s-demo/applications/test-my-webserver/
+$ cd ~/k3s-demo/applications/test-my-webserver/
 $ kustomize build . | kubectl apply -f -
 namespace/test created
 service/my-webserver created

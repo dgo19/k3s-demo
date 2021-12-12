@@ -1,7 +1,11 @@
 # Argo CD Deployment & first steps
+In case of a single ubuntu VM, add the required subdomain to /etc/hosts
+```
+sudo sed -i '/^127.0.0.1/ s/$/ argocd\.k3sdemo\.lan/' /etc/hosts
+```
 Deploy Argo CD.
 ```
-$ cd k3s-demo/argocd/
+$ cd ~/k3s-demo/argocd/
 $ kubectl apply -k .
 namespace/argocd created
 customresourcedefinition.apiextensions.k8s.io/applications.argoproj.io created
@@ -91,14 +95,19 @@ Context 'argocd.k3sdemo.lan' updated
 ```
 Review the cluster, project, repo and apps.
 ```
+$ argocd cluster list
 SERVER                          NAME        VERSION  STATUS   MESSAGE
 https://kubernetes.default.svc  in-cluster           Unknown  Cluster has no application and not being monitored.
 ```
 ```
-TYPE  NAME            REPO                                   INSECURE  OCI    LFS    CREDS  STATUS      MESSAGE
-git   dgo19-k3s-demo  https://github.com/dgo19/k3s-demo.git  false     false  false  false  Successful  
+$ argocd repo list
+TYPE  NAME                  REPO                                                INSECURE  OCI    LFS    CREDS  STATUS      MESSAGE
+git   dgo19-k3s-demo        https://github.com/dgo19/k3s-demo.git               false     false  false  false  Successful  
+helm  grafana               https://grafana.github.io/helm-charts               false     false  false  false  Successful  
+helm  prometheus-community  https://prometheus-community.github.io/helm-charts  false     false  false  false  Successful  
 ```
 ```
+$ argocd proj list
 NAME     DESCRIPTION  DESTINATIONS  SOURCES  CLUSTER-RESOURCE-WHITELIST  NAMESPACE-RESOURCE-BLACKLIST  SIGNATURE-KEYS  ORPHANED-RESOURCES
 default               *,*           *        */*                         <none>                        <none>          disabled
 ```
@@ -118,6 +127,7 @@ NAME    CLUSTER                         NAMESPACE  PROJECT  STATUS     HEALTH   
 argocd  https://kubernetes.default.svc  argocd     default  OutOfSync  Healthy  <none>      <none>      https://github.com/dgo19/k3s-demo.git  argocd  HEAD
 ```
 ```
+$ argocd app diff argocd
 ===== /ConfigMap argocd/argocd-cm ======
 12a13
 >     app.kubernetes.io/instance: argocd
