@@ -201,4 +201,4 @@ NAME                  READY   STATUS    RESTARTS   AGE
 loki-promtail-kxdkc   1/1     Running   0          2m59s
 loki-0                1/1     Running   0          2m59s
 ```
-You can view the logs in the [https://grafana.k3sdemo.lan/](Grafana) dashboard "Logging Dashboard via Loki".
+You can view the logs in the [Grafana](https://grafana.k3sdemo.lan/) dashboard "Logging Dashboard via Loki".
