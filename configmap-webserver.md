@@ -1,7 +1,7 @@
 ## Configmap - Webserver example
 In case of a single ubuntu VM, add the required subdomain to /etc/hosts
 ```
-sudo sed -i '/^127.0.0.1/ s/$/ configmap-web\.k3sdemo\.lan/' /etc/hosts
+$ sudo sed -i '/^127.0.0.1/ s/$/ configmap-web\.k3sdemo\.lan/' /etc/hosts
 ```
 create namespace for configmap tests
 ```

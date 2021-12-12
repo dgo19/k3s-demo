@@ -68,7 +68,7 @@ rtt min/avg/max/mdev = 0.021/0.021/0.021/0.000 ms
 ```
 In case of a single ubuntu VM, you add the required subdomains to /etc/hosts
 ```
-sudo sed -i '/^127.0.0.1/ s/$/ my-webserver\.k3sdemo\.lan/' /etc/hosts
+$ sudo sed -i '/^127.0.0.1/ s/$/ my-webserver\.k3sdemo\.lan/' /etc/hosts
 ```
 ## Clone git Repo
 ```

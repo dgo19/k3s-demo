@@ -1,7 +1,7 @@
 # Argo CD Deployment & first steps
 In case of a single ubuntu VM, add the required subdomain to /etc/hosts
 ```
-sudo sed -i '/^127.0.0.1/ s/$/ argocd\.k3sdemo\.lan/' /etc/hosts
+$ sudo sed -i '/^127.0.0.1/ s/$/ argocd\.k3sdemo\.lan/' /etc/hosts
 ```
 Deploy Argo CD.
 ```
