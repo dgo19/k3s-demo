@@ -132,7 +132,7 @@ $ sudo sed -i '/^127.0.0.1/ s/$/ alertmanager\.k3sdemo\.lan/' /etc/hosts
 ### Grafana
 Grafana provides dashboards with several prometheus metrics.
 For this demo, you can access the dashboard with an anonymous read-only user. 
-[https://grafana.k3sdemolan](https://grafana.k3sdemolan)
+[https://grafana.k3sdemo.lan](https://grafana.k3sdemo.lan)
 Click on the Dashboards-Icon on the left side and then "Manage". Most of the Dashboards are working.
 When you want to see logs (loki dashboards), deploy the loki application in arcgocd. See [Loki Logging Stack](loki.md)
 
