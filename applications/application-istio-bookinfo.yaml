@@ -10,6 +10,6 @@ spec:
   project: default
   source:
     path: applications/istio-bookinfo
-    repoURL: git@gitlab.home:argocd-k3s-home/applications.git
+    repoURL: https://github.com/dgo19/k3s-demo.git
     targetRevision: HEAD
   syncPolicy: {}
