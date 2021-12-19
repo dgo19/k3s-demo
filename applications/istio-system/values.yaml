@@ -38,3 +38,4 @@ kiali-server:
     signing_key: "secret:kiali-signing-key:key"
   server:
     web_fqdn: "kiali.k3sdemo.lan"
+    web_root: "/"
