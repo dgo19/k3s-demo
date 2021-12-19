@@ -36,3 +36,5 @@ kiali-server:
       url: "https://grafana.k3sdemo.lan/"
   login_token:
     signing_key: "secret:kiali-signing-key:key"
+  server:
+    web_fqdn: "kiali.k3sdemo.lan"
