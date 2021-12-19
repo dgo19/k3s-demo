@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-bookinfo
+  namespace: argocd
+spec:
+  destination:
+    namespace: istio-bookinfo
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: applications/istio-bookinfo
+    repoURL: git@gitlab.home:argocd-k3s-home/applications.git
+    targetRevision: HEAD
+  syncPolicy: {}
