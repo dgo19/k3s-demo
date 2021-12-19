@@ -2,6 +2,7 @@ kube-prometheus-stack:
   alertmanager:
     ingress:
       enabled: true
+      ingressClassName: nginx
       hosts:
         - alertmanager.k3sdemo.lan
       pathType: "ImplementationSpecific"
@@ -16,6 +17,7 @@ kube-prometheus-stack:
   grafana:
     ingress:
       enabled: "true"
+      ingressClassName: nginx
       hosts:
         - grafana.k3sdemo.lan
     additionalDataSources:
@@ -61,6 +63,26 @@ kube-prometheus-stack:
           gnetId: 13489
           revision: 1
           datasource: default
+        istiomesh:
+          gnetId: 7639
+          revision: 101
+          datasource: default
+        istioperf:
+          gnetId: 11829
+          revision: 101
+          datasource: default
+        istioservice:
+          gnetId: 7636
+          revision: 101
+          datasource: default
+        istiowork:
+          gnetId: 7630
+          revision: 101
+          datasource: default
+        istioctrl:
+          gnetId: 7645
+          revision: 101
+          datasource: default
     plugins:
       - grafana-piechart-panel
   kubeApiServer:
@@ -80,6 +102,7 @@ kube-prometheus-stack:
   prometheus:
     ingress:
       enabled: "true"
+      ingressClassName: nginx
       hosts:
         - prometheus.k3sdemo.lan
       pathType: "ImplementationSpecific"
@@ -91,6 +114,25 @@ kube-prometheus-stack:
             resources:
               requests:
                 storage: "12Gi"
+      additionalScrapeConfigs:
+        - job_name: 'istiod'
+          kubernetes_sd_configs:
+          - role: endpoints
+            namespaces:
+              names:
+              - istio-system
+          relabel_configs:
+          - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+            action: keep
+            regex: istiod;http-monitoring
+        - job_name: 'envoy-stats'
+          metrics_path: /stats/prometheus
+          kubernetes_sd_configs:
+          - role: pod
+          relabel_configs:
+          - source_labels: [__meta_kubernetes_pod_container_port_name]
+            action: keep
+            regex: '.*-envoy-prom'
   prometheusOperator:
     admissionWebhooks:
       failurePolicy: "Ignore"
