@@ -52,7 +52,11 @@ kube-prometheus-stack:
     dashboards:
       default:
         Logging:
-          gnetId: 12611
+          gnetId: 13186
+          revison: 1
+          datasource: loki
+        LoggingStats:
+          gnetId: 10880
           revison: 1
           datasource: loki
         ArgoCD:
