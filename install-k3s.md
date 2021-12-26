@@ -70,6 +70,18 @@ In case of a single ubuntu VM, you add the required subdomains to /etc/hosts
 ```
 $ sudo sed -i '/^127.0.0.1/ s/$/ my-webserver\.k3sdemo\.lan/' /etc/hosts
 ```
+## setup sysctl fs.inotify.max_user_instances
+Increase max_user_instances for fs.inotify
+```
+$ sudo bash -c "echo 'fs.inotify.max_user_instances = 8192' > /etc/sysctl.d/98-fs-inotify-max_user_instances.conf"
+$ sudo systemctl restart systemd-sysctl.service
+```
+Check value for variable. It should be 8192 now.
+```
+$ cat /proc/sys/fs/inotify/max_user_instances
+8192
+```
+
 ## Clone git Repo
 ```
 $ git clone https://github.com/dgo19/k3s-demo.git ~/k3s-demo
