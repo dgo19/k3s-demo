@@ -5,6 +5,7 @@ resources:
   - application-configmaps.yaml
   - application-ingress-nginx.yaml
   - application-istio-bookinfo.yaml
+  - application-istio-bookinfo-bombardier.yaml
   - application-istio-system.yaml
   - application-keycloak.yaml
   - application-loki.yaml

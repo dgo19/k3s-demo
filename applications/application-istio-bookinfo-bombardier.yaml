@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-bookinfo-bombardier
+  namespace: argocd
+spec:
+  destination:
+    namespace: istio-bookinfo-bombardier
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: applications/istio-bookinfo-bombardier
+    repoURL: https://github.com/dgo19/k3s-demo.git
+    targetRevision: HEAD
+  syncPolicy: {}

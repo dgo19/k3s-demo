@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: bombardier
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Allow
+  successfulJobsHistoryLimit: 10
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: bombardier
+            image: docker.io/alpine/bombardier
+            imagePullPolicy: IfNotPresent
+            command:
+            - "bombardier"
+            - "-c"
+            - "2"
+            - "-d"
+            - "6m"
+            - "-p"
+            - "i,r"
+            - "-r"
+            - "10"
+            - "http://istio-ingressgateway.istio-system.svc.cluster.local:30080/productpage"
+          restartPolicy: Never
