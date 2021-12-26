@@ -1,6 +1,7 @@
 apiVersion: v1
 data:
   secret.createSecret: "false"
+  application.instanceLabelKey: "argocd.argoproj.io/instance"
   repositories: |
     - name: dgo19-k3s-demo
       type: git
