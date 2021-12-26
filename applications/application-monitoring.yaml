@@ -12,6 +12,8 @@ spec:
     path: applications/monitoring
     repoURL: https://github.com/dgo19/k3s-demo.git
     targetRevision: HEAD
+    plugin:
+      name: kustomized-helm
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
