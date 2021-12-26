@@ -105,6 +105,10 @@ kube-prometheus-stack:
         enabled: true
         additionalLabels:
           release: prometheus-operator
+  prometheus-node-exporter:
+    prometheus:
+      monitor:
+        enabled: true
   prometheus:
     ingress:
       enabled: "true"
