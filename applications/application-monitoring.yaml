@@ -14,6 +14,9 @@ spec:
     targetRevision: HEAD
     plugin:
       name: kustomized-helm
+      env:
+        - name: OPTIONS
+          value: --include-crds
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
