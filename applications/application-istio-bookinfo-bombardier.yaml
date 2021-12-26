@@ -12,4 +12,6 @@ spec:
     path: applications/istio-bookinfo-bombardier
     repoURL: https://github.com/dgo19/k3s-demo.git
     targetRevision: HEAD
-  syncPolicy: {}
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
