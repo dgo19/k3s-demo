@@ -36,6 +36,9 @@ spec:
           value: $(params.path-to-image-context)
         - name: DOCKERFILE
           value: $(params.path-to-dockerfile)
+        - name: EXTRA_ARGS
+          value:
+            - "--skip-tls-verify-registry=registry.registry.svc.cluster.local"
       workspaces:
         - name: source
           workspace: git-source

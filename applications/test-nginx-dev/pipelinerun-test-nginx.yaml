@@ -11,7 +11,7 @@ spec:
     - name: git-revision
       value: main
     - name: image-name
-      value: registry.k3sdemo.lan/test/test-nginx:latest
+      value: registry.registry.svc.cluster.local:5000/test/test-nginx:latest
     - name: path-to-image-context
       value: ./
     - name: path-to-dockerfile
