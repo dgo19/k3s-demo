@@ -13,6 +13,7 @@ resources:
   - application-mariadb-pv.yaml
   - application-monitoring.yaml
   - application-postgres-operator.yaml
+  - application-registry.yaml
   - application-sealed-secrets.yaml
   - application-starboard.yaml
   - application-test-my-webserver.yaml

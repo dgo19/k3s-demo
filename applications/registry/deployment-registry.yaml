@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: registry
+  name: registry
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: registry
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: registry
+    spec:
+      containers:
+      - image: registry:2
+        imagePullPolicy: Always
+        name: registry
+        env:
+          - name: REGISTRY_AUTH
+            valueFrom:
+              configMapKeyRef:
+                name: registry-conf
+                key: registry_auth
+          - name: REGISTRY_AUTH_HTPASSWD_REALM
+            valueFrom:
+              configMapKeyRef:
+                name: registry-conf
+                key: registry_auth_htpasswd_realm
+          - name: REGISTRY_AUTH_HTPASSWD_PATH
+            valueFrom:
+              configMapKeyRef:
+                name: registry-conf
+                key: registry_auth_htpasswd_path
+          - name: REGISTRY_HTTP_TLS_CERTIFICATE
+            valueFrom:
+              configMapKeyRef:
+                name: registry-conf
+                key: registry_http_tls_certificate
+          - name: REGISTRY_HTTP_TLS_KEY
+            valueFrom:
+              configMapKeyRef:
+                name: registry-conf
+                key: registry_http_tls_key
+          - name: REGISTRY_HTTP_ADDR
+            valueFrom:
+              configMapKeyRef:
+                name: registry-conf
+                key: registry_http_addr
+          - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
+            valueFrom:
+              configMapKeyRef:
+                name: registry-conf
+                key: registry_storage_filesystem_rootdirectory
+        volumeMounts:
+          - name: registry-storage
+            mountPath: /var/lib/registry
+          - name: certs
+            mountPath: /certs
+            readOnly: true
+          - name: auth
+            mountPath: /auth
+            readOnly: true
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      volumes:
+      - name: registry-storage
+        persistentVolumeClaim:
+          claimName: pvc-registry
+      - name: certs
+        secret:
+          secretName: registry-tls
+      - name: auth
+        secret:
+          secretName: registry-auth
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

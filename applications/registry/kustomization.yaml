@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: registry
+
+resources:
+  - deployment-registry.yaml
+  - ingress-registry.yaml
+  - namespace-registry.yaml
+  - pvc-registry.yaml
+  - sealedsecret-registry-auth.yaml
+  - sealedsecret-registry-tls.yaml
+  - service-registry.yaml
+
+configMapGenerator:
+  - name: registry-conf
+    literals:
+      - registry_auth="htpasswd"
+      - registry_auth_htpasswd_realm="Registry Realm"
+      - registry_auth_htpasswd_path="/auth/htpasswd"
+      - registry_http_addr=":5000"
+      - registry_http_tls_certificate="/certs/tls.crt"
+      - registry_http_tls_key="/certs/tls.key"
+      - registry_storage_filesystem_rootdirectory="/var/lib/registry"
+
+generatorOptions:
+  disableNameSuffixHash: true
