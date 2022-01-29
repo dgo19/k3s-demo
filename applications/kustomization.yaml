@@ -18,3 +18,4 @@ resources:
   - application-starboard.yaml
   - application-tekton-pipelines.yaml
   - application-test-my-webserver.yaml
+  - application-test-nginx.yaml
