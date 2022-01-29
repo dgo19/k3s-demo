@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-nginx
+  namespace: argocd
+spec:
+  destination:
+    namespace: test-nginx
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: applications/test-nginx
+    repoURL: https://github.com/dgo19/k3s-demo.git
+    targetRevision: HEAD
+  syncPolicy: {}
