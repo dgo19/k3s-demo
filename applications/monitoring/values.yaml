@@ -58,7 +58,7 @@ kube-prometheus-stack:
         LoggingStats:
           gnetId: 10880
           revison: 1
-          datasource: loki
+          datasource: default
         ArgoCD:
           gnetId: 14584
           revision: 1
