@@ -16,4 +16,5 @@ resources:
   - application-registry.yaml
   - application-sealed-secrets.yaml
   - application-starboard.yaml
+  - application-tekton-pipelines.yaml
   - application-test-my-webserver.yaml

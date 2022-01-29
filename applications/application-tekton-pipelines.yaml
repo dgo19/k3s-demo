@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tekton-pipelines
+  namespace: argocd
+spec:
+  destination:
+    namespace: tekton-pipelines
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: applications/tekton-pipelines
+    repoURL: https://github.com/dgo19/k3s-demo.git
+    targetRevision: HEAD
+  syncPolicy: {}
