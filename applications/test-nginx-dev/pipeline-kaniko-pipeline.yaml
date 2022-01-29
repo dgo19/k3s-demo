@@ -38,7 +38,7 @@ spec:
           value: $(params.path-to-dockerfile)
         - name: EXTRA_ARGS
           value:
-            - "--skip-tls-verify-registry=registry.registry.svc.cluster.local"
+            - "--skip-tls-verify-registry=registry.registry.svc.cluster.local:5000"
       workspaces:
         - name: source
           workspace: git-source
