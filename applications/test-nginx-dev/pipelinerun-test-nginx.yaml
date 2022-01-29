@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: test-nginx
+spec:
+  pipelineRef:
+    name: kaniko-pipeline
+  params:
+    - name: git-url
+      value: https://github.com/dgo19/k3s-demo-test-nginx
+    - name: git-revision
+      value: main
+    - name: image-name
+      value: registry.k3sdemo.lan/test/test-nginx:latest
+    - name: path-to-image-context
+      value: ./
+    - name: path-to-dockerfile
+      value: ./Dockerfile
+  workspaces:
+    - name: git-source
+      persistentVolumeClaim:
+        claimName: pvc-test-nginx-build
+    - name: dockerconfig
+      secret:
+        secretName: registry-k3sdemo-lan

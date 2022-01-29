@@ -1,0 +1,46 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: kaniko-pipeline
+spec:
+  params:
+    - name: git-url
+    - name: git-revision
+    - name: image-name
+    - name: path-to-image-context
+    - name: path-to-dockerfile
+  workspaces:
+    - name: git-source
+    - name: dockerconfig
+  tasks:
+    - name: fetch-from-git
+      taskRef:
+        name: git-clone
+      params:
+        - name: url
+          value: $(params.git-url)
+        - name: revision
+          value: $(params.git-revision)
+      workspaces:
+        - name: output
+          workspace: git-source
+    - name: build-image
+      taskRef:
+        name: kaniko
+      runAfter:
+        - fetch-from-git
+      params:
+        - name: IMAGE
+          value: $(params.image-name)
+        - name: CONTEXT
+          value: $(params.path-to-image-context)
+        - name: DOCKERFILE
+          value: $(params.path-to-dockerfile)
+      workspaces:
+        - name: source
+          workspace: git-source
+        - name: dockerconfig
+          workspace: dockerconfig
+  # If you want you can add a Task that uses the IMAGE_DIGEST from the kaniko task
+  # via $(tasks.build-image.results.IMAGE_DIGEST) - this was a feature we hadn't been
+  # able to fully deliver with the Image PipelineResource!

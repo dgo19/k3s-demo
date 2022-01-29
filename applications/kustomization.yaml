@@ -19,3 +19,4 @@ resources:
   - application-tekton-pipelines.yaml
   - application-test-my-webserver.yaml
   - application-test-nginx.yaml
+  - application-test-nginx-dev.yaml
