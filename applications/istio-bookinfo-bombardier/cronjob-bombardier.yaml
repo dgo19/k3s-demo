@@ -23,6 +23,6 @@ spec:
             - "-p"
             - "i,r"
             - "-r"
-            - "10"
+            - "2"
             - "http://istio-ingressgateway.istio-system.svc.cluster.local:30080/productpage"
           restartPolicy: Never
