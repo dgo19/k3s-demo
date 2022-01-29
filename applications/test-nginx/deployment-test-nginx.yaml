@@ -23,7 +23,7 @@ spec:
         app: test-nginx
     spec:
       containers:
-      - image: registry.k3s.home/test/test-nginx:latest
+      - image: registry.k3sdemo.lan/test/test-nginx:latest
         imagePullPolicy: Always
         name: nginx
         resources: {}
