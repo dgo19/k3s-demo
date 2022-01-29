@@ -7,5 +7,5 @@ resources:
   - deployment-test-nginx.yaml
   - ingress-test-nginx.yaml
   - namespace-test-nginx.yaml
-  - sealedsecret-registry-k3s-home.yaml
+  - sealedsecret-registry-k3sdemo-lan.yaml
   - service-test-nginx.yaml
