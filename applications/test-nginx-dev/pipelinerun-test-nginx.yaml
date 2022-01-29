@@ -22,4 +22,4 @@ spec:
         claimName: pvc-test-nginx-build
     - name: dockerconfig
       secret:
-        secretName: registry-k3sdemo-lan
+        secretName: registry-auth
