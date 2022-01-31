@@ -6,3 +6,4 @@ resources:
 
 patches:
   - deployment-istio-ingressgateway.yaml
+  - hpa-istio-ingressgateway.yaml
