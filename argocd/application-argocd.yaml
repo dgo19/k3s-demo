@@ -3,6 +3,10 @@ kind: Application
 metadata:
   name: argocd
   namespace: argocd
+  labels:
+    appgroup: system
+  annotations:
+    argocd.argoproj.io/sync-wave: "-15"
 spec:
   destination:
     namespace: argocd
