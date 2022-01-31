@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: istio-bookinfo-bombardier
   namespace: argocd
+  labels:
+    appgroup: servicemesh
 spec:
   destination:
     namespace: istio-bookinfo-bombardier
