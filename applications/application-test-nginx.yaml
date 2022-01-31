@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: test-nginx
   namespace: argocd
+  labels:
+    appgroup: cicd
 spec:
   destination:
     namespace: test-nginx
