@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: registry
@@ -12,6 +12,10 @@ spec:
   - host: registry.k3sdemo.lan
     http:
       paths:
-      - backend:
-          serviceName: registry
-          servicePort: 5000
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: registry
+            port:
+              number: 5000
