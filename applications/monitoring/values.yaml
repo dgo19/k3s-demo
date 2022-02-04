@@ -55,7 +55,7 @@ kube-prometheus-stack:
       default:
         LoggingQuick:
           gnetId: 12019
-          revison: 1
+          revison: 2
           datasource: loki
         LoggingStats:
           gnetId: 13407
