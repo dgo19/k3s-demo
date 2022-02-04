@@ -53,6 +53,12 @@ kube-prometheus-stack:
               path: /var/lib/grafana/dashboards/default
     dashboards:
       default:
+        Logging12611:
+          file: dashboards/dashboard-12611.json
+          datasource: loki
+        Logging13186:
+          file: dashboards/dashboard-13186.json
+          datasource: loki
         LoggingStats:
           gnetId: 10880
           revison: 1
