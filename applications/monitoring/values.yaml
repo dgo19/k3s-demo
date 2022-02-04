@@ -107,8 +107,6 @@ kube-prometheus-stack:
     prometheus:
       monitor:
         enabled: true
-        additionalLabels:
-          release: monitoring
   prometheus-node-exporter:
     prometheus:
       monitor:
