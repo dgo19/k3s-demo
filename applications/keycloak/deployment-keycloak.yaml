@@ -42,12 +42,12 @@ spec:
         - name: DB_USER
           valueFrom:
             secretKeyRef:
-              name: keycloak.acid-minimal-cluster.credentials
+              name: keycloak.acid-minimal-cluster.credentials.postgresql.acid.zalan.do
               key: username
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: keycloak.acid-minimal-cluster.credentials
+              name: keycloak.acid-minimal-cluster.credentials.postgresql.acid.zalan.do
               key: password
         volumeMounts:
         - mountPath: /opt/jboss/keycloak/standalone/deployments/
