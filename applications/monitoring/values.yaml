@@ -69,10 +69,6 @@ kube-prometheus-stack:
           gnetId: 14584
           revision: 1
           datasource: default
-        WildFly:
-          gnetId: 13489
-          revision: 1
-          datasource: default
         istiomesh:
           gnetId: 7639
           revision: 101
