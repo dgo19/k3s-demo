@@ -17,13 +17,13 @@ spec:
       initContainers:
       - name: init
         image: alpine
-        command: ['sh', '-c', 'wget -O /deployments/keycloak-metrics-spi.jar https://github.com/aerogear/keycloak-metrics-spi/releases/download/2.4.0/keycloak-metrics-spi-2.4.0.jar && touch /deployments/keycloak-metrics-spi.jar.dodeploy']
+        command: ['sh', '-c', 'wget -O /deployments/keycloak-metrics-spi.jar https://github.com/aerogear/keycloak-metrics-spi/releases/download/2.5.3/keycloak-metrics-spi-2.5.3.jar && touch /deployments/keycloak-metrics-spi.jar.dodeploy']
         volumeMounts:
           - mountPath: /deployments
             name: deployments
       containers:
       - name: keycloak
-        image: quay.io/keycloak/keycloak:15.0.0
+        image: quay.io/keycloak/keycloak:16.1.1
         env:
         - name: KEYCLOAK_USER
           value: "admin"
