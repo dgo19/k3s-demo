@@ -1,4 +1,41 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_LOKI",
+      "label": "loki",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "loki",
+      "pluginName": "Loki"
+    }
+  ],
+  "__elements": [],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "8.3.4"
+    },
+    {
+      "type": "panel",
+      "id": "logs",
+      "name": "Logs",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "loki",
+      "name": "Loki",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -21,15 +58,15 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 35,
-  "iteration": 1644001869156,
+  "id": null,
+  "iteration": 1644007538885,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "loki",
-        "uid": "P982945308D3682D1"
+        "uid": "${DS_LOKI}"
       },
       "fieldConfig": {
         "defaults": {
@@ -105,7 +142,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P982945308D3682D1"
+            "uid": "${DS_LOKI}"
           },
           "expr": "rate({namespace=\"$namespace\"}[1m])",
           "legendFormat": "{{pod}}",
@@ -118,7 +155,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P982945308D3682D1"
+        "uid": "${DS_LOKI}"
       },
       "gridPos": {
         "h": 16,
@@ -141,7 +178,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P982945308D3682D1"
+            "uid": "${DS_LOKI}"
           },
           "expr": "{namespace=\"$namespace\",pod=\"$pod\",container=\"$container\"} |= \"$search\"",
           "refId": "A"
@@ -158,14 +195,10 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": true,
-          "text": "test",
-          "value": "test"
-        },
+        "current": {},
         "datasource": {
           "type": "loki",
-          "uid": "P982945308D3682D1"
+          "uid": "${DS_LOKI}"
         },
         "definition": "label_values(namespace)",
         "hide": 0,
@@ -174,22 +207,17 @@
         "name": "namespace",
         "options": [],
         "query": "label_values(namespace)",
-        "refresh": 2,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
       },
       {
-        "current": {
-          "isNone": true,
-          "selected": true,
-          "text": "None",
-          "value": ""
-        },
+        "current": {},
         "datasource": {
           "type": "loki",
-          "uid": "P982945308D3682D1"
+          "uid": "${DS_LOKI}"
         },
         "definition": "label_values({namespace=\"$namespace\"}, pod)",
         "hide": 0,
@@ -205,15 +233,10 @@
         "type": "query"
       },
       {
-        "current": {
-          "isNone": true,
-          "selected": false,
-          "text": "None",
-          "value": ""
-        },
+        "current": {},
         "datasource": {
           "type": "loki",
-          "uid": "P982945308D3682D1"
+          "uid": "${DS_LOKI}"
         },
         "definition": "label_values({namespace=\"$namespace\",pod=\"$pod\"},container)",
         "hide": 0,
@@ -257,6 +280,6 @@
   "timezone": "",
   "title": "Loki Logs",
   "uid": "ayZtln-7z",
-  "version": 12,
+  "version": 2,
   "weekStart": ""
 }
