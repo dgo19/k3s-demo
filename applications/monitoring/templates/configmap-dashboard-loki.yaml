@@ -7,3 +7,5 @@ metadata:
   creationTimestamp: null
   name: dashboard-loki
   namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
