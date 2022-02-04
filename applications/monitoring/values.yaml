@@ -147,6 +147,7 @@ kube-prometheus-stack:
           - source_labels: [__meta_kubernetes_pod_container_port_name]
             action: keep
             regex: '.*-envoy-prom'
+      serviceMonitorSelector: {}
   prometheusOperator:
     admissionWebhooks:
       failurePolicy: "Ignore"
