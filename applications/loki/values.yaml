@@ -6,8 +6,6 @@ loki-stack:
       storageClassName: "local-path"
     serviceMonitor:
       enabled: "true"
-      additionalLabels:
-        release: "monitoring"
   promtail:
     enabled: "true"
     extraScrapeConfigs:
@@ -33,5 +31,3 @@ loki-stack:
         readOnly: true
     serviceMonitor:
       enabled: true
-      labels:
-        release: monitoring
