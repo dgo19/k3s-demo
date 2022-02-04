@@ -96,7 +96,7 @@
         "rgb(31, 255, 7)",
         "rgb(31, 255, 7)"
       ],
-      "datasource": "${DS_LOKI}",
+      "datasource": "loki",
       "description": "Total  Count of log lines in the specified time range",
       "fieldConfig": {
         "defaults": {
@@ -192,7 +192,7 @@
         "rgb(222, 15, 43)",
         "rgb(222, 15, 43)"
       ],
-      "datasource": "${DS_LOKI}",
+      "datasource": "loki",
       "description": "Total Count: of $searchable_pattern in the specified time range",
       "fieldConfig": {
         "defaults": {
@@ -278,7 +278,7 @@
       "valueName": "total"
     },
     {
-      "datasource": "${DS_LOKI}",
+      "datasource": "loki",
       "description": "Live logs is a like 'tail -f' in a real time",
       "fieldConfig": {
         "defaults": {
@@ -313,7 +313,7 @@
     },
     {
       "content": "",
-      "datasource": "${DS_NY-ALERTING2}",
+      "datasource": "loki",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -350,7 +350,7 @@
         "label": "Others",
         "threshold": 0
       },
-      "datasource": "${DS_LOKI}",
+      "datasource": "loki",
       "decimals": null,
       "fieldConfig": {
         "defaults": {
@@ -433,7 +433,7 @@
         "label": "Others",
         "threshold": 0
       },
-      "datasource": "${DS_LOKI}",
+      "datasource": "loki",
       "decimals": 0,
       "fieldConfig": {
         "defaults": {
@@ -480,7 +480,7 @@
     },
     {
       "cacheTimeout": null,
-      "datasource": "${DS_LOKI}",
+      "datasource": "loki",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -559,7 +559,7 @@
       "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOKI}",
+      "datasource": "loki",
       "decimals": 0,
       "fieldConfig": {
         "defaults": {
@@ -666,7 +666,7 @@
       "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOKI}",
+      "datasource": "loki",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -768,7 +768,7 @@
       "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOKI}",
+      "datasource": "loki",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -920,7 +920,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_LOKI}",
+        "datasource": "loki",
         "definition": "label_values({container=~\".+\"}, container)",
         "hide": 0,
         "includeAll": false,
@@ -942,7 +942,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_LOKI}",
+        "datasource": "loki",
         "definition": "label_values({container=\"$container\"}, pod)",
         "hide": 0,
         "includeAll": true,
@@ -964,7 +964,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_LOKI}",
+        "datasource": "loki",
         "definition": "label_values({container=\"$container\"}, stream)",
         "hide": 0,
         "includeAll": true,
