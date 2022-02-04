@@ -2,8 +2,6 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: argocd-metrics
-  labels:
-    release: monitoring
 spec:
   selector:
     matchLabels:
