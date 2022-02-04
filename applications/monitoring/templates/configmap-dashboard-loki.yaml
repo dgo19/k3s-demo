@@ -1,6 +1,6 @@
 apiVersion: v1
 data:
-  loki.yaml: |-
+  loki.json: |-
     {
       "__inputs": [
         {
