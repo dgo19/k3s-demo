@@ -305,6 +305,8 @@ $ cat <<EOF | kubectl -n test apply -f -
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
   name: ingress-my-webserver
 spec:
   rules:
