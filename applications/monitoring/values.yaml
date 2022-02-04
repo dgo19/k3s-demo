@@ -20,6 +20,8 @@ kube-prometheus-stack:
       ingressClassName: nginx
       hosts:
         - grafana.k3sdemo.lan
+    serviceMonitor:
+      enabled: true
     additionalDataSources:
       - name: "loki"
         access: "proxy"
