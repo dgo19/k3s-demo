@@ -59,14 +59,14 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1644007538885,
+  "iteration": 1644089050918,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "loki",
-        "uid": "${DS_LOKI}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -142,7 +142,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "${DS_LOKI}"
+            "uid": "${datasource}"
           },
           "expr": "rate({namespace=\"$namespace\"}[1m])",
           "legendFormat": "{{pod}}",
@@ -155,7 +155,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "${DS_LOKI}"
+        "uid": "${datasource}"
       },
       "gridPos": {
         "h": 16,
@@ -178,7 +178,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "${DS_LOKI}"
+            "uid": "${datasource}"
           },
           "expr": "{namespace=\"$namespace\",pod=\"$pod\",container=\"$container\"} |= \"$search\"",
           "refId": "A"
@@ -195,10 +195,28 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "loki",
+          "value": "loki"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "loki",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "current": {},
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "definition": "label_values(namespace)",
         "hide": 0,
@@ -217,7 +235,7 @@
         "current": {},
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "definition": "label_values({namespace=\"$namespace\"}, pod)",
         "hide": 0,
@@ -236,7 +254,7 @@
         "current": {},
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "definition": "label_values({namespace=\"$namespace\",pod=\"$pod\"},container)",
         "hide": 0,
@@ -253,7 +271,7 @@
       },
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "",
           "value": ""
         },
@@ -278,8 +296,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Loki Logs",
-  "uid": "ayZtln-7z",
+  "title": "Loki Logs Viewer",
+  "uid": "7K4xpNa7z",
   "version": 2,
   "weekStart": ""
 }
