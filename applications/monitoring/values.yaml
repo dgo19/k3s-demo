@@ -89,10 +89,6 @@ kube-prometheus-stack:
           gnetId: 9614
           revision: 1
           datasource: default
-        KeyCloak:
-          gnetId: 10441
-          revision: 1
-          datasource: 1
     plugins:
       - grafana-piechart-panel
   kubeApiServer:
