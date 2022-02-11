@@ -132,26 +132,27 @@ done.
 ```
 Install ingress nginx
 ```
-$ kubectl apply -k .
+$ helm template --dependency-update ingress-nginx . -n ingress-nginx --create-namespace | kubectl apply -f -
 namespace/ingress-nginx created
 serviceaccount/ingress-nginx created
-serviceaccount/ingress-nginx-admission created
-role.rbac.authorization.k8s.io/ingress-nginx created
-role.rbac.authorization.k8s.io/ingress-nginx-admission created
-clusterrole.rbac.authorization.k8s.io/ingress-nginx created
-clusterrole.rbac.authorization.k8s.io/ingress-nginx-admission created
-rolebinding.rbac.authorization.k8s.io/ingress-nginx created
-rolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
-clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx created
-clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
 configmap/ingress-nginx-controller created
-sealedsecret/tls-secret created
-service/ingress-nginx-controller created
+clusterrole.rbac.authorization.k8s.io/ingress-nginx created
+clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx created
+role.rbac.authorization.k8s.io/ingress-nginx created
+rolebinding.rbac.authorization.k8s.io/ingress-nginx created
 service/ingress-nginx-controller-admission created
-deployment.apps/ingress-nginx-controller created
+service/ingress-nginx-controller created
+daemonset.apps/ingress-nginx-controller created
+ingressclass.networking.k8s.io/nginx created
+sealedsecret.bitnami.com/tls-secret created
+validatingwebhookconfiguration.admissionregistration.k8s.io/ingress-nginx-admission created
+serviceaccount/ingress-nginx-admission created
+clusterrole.rbac.authorization.k8s.io/ingress-nginx-admission created
+clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
+role.rbac.authorization.k8s.io/ingress-nginx-admission created
+rolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
 job.batch/ingress-nginx-admission-create created
 job.batch/ingress-nginx-admission-patch created
-validatingwebhookconfiguration.admissionregistration.k8s.io/ingress-nginx-admission created
 ```
 Check for running pods. This can take a few minutes to complete.
 ```
