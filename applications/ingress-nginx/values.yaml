@@ -1,0 +1,13 @@
+ingress-nginx:
+  controller:
+    hostNetwork: true
+    extraArgs:
+      default-ssl-certificate: ingress-nginx/tls-secret
+      enable-ssl-passthrough: ""
+    kind: DaemonSet
+    service:
+      enabled: true
+      type: ClusterIP
+    metrics:
+      ServiceMonitor:
+        enabled: true
