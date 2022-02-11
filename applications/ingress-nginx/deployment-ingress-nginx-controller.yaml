@@ -5,6 +5,8 @@ metadata:
   namespace: ingress-nginx
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     spec:
       hostNetwork: true
@@ -13,7 +15,7 @@ spec:
           args:
             - /nginx-ingress-controller
             - --election-id=ingress-controller-leader
-            - --ingress-class=nginx
+            - --controller-class=k8s.io/ingress-nginx
             - --configmap=ingress-nginx/ingress-nginx-controller
             - --validating-webhook=:8443
             - --validating-webhook-certificate=/usr/local/certificates/cert
