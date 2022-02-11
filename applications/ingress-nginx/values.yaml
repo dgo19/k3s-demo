@@ -9,5 +9,6 @@ ingress-nginx:
       enabled: true
       type: ClusterIP
     metrics:
+      enabled: true
       ServiceMonitor:
         enabled: true
