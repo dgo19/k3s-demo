@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
+
+namespace: kubernetes-dashboard
+
+resources:
+  - ingress-kubernetes-dashboard.yaml
+
+patchesStrategicMerge:
+  - crb-dashboard-admin.yaml

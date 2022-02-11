@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubernetes-dashboard
+  namespace: argocd
+  labels:
+    appgroup: system
+spec:
+  destination:
+    namespace: kubernetes-dashboard
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: applications/kubernetes-dashboard
+    repoURL: https://github.com/dgo19/k3s-demo.git
+    targetRevision: HEAD
+  syncPolicy: {}
