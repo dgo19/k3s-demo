@@ -7,6 +7,7 @@ resources:
   - application-istio-bookinfo.yaml
   - application-istio-bookinfo-bombardier.yaml
   - application-istio-system.yaml
+  - application-istio-system-jaeger.yaml
   - application-keycloak.yaml
   - application-kubernetes-dashboard.yaml
   - application-loki.yaml
