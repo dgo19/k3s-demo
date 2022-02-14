@@ -7,15 +7,15 @@ appVersion: "1.0"
 
 dependencies:
 - name: base
-  version: 1.12.1
+  version: 1.13.0
   repository: https://istio-release.storage.googleapis.com/charts
 - name: istiod
-  version: 1.12.1
+  version: 1.13.0
   repository: https://istio-release.storage.googleapis.com/charts
 - name: gateway
-  version: 1.12.1
-  repository: file://gateway
-  #repository: https://istio-release.storage.googleapis.com/charts
+  version: 1.13.0
+  #repository: file://gateway
+  repository: https://istio-release.storage.googleapis.com/charts
 - name: kiali-server
   version: v1.45
   repository: https://kiali.org/helm-charts
