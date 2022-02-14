@@ -24,7 +24,7 @@ gateway:
 kiali-server:
   deployment:
     ingress:
-      enabled: true
+      enabled: false
       class_name: "nginx"
   external_services:
     prometheus:
