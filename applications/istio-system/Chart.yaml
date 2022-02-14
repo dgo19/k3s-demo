@@ -17,5 +17,5 @@ dependencies:
   repository: file://gateway
   #repository: https://istio-release.storage.googleapis.com/charts
 - name: kiali-server
-  version: v1.43
+  version: v1.45
   repository: https://kiali.org/helm-charts
