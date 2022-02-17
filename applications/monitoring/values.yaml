@@ -95,6 +95,10 @@ kube-prometheus-stack:
     enabled: "true"
   kubeControllerManager:
     enabled: "false"
+    service:
+      enabled: "false"
+    serviceMonitor:
+      enabled: "false"
   kubeDns:
     enabled: "false"
   kubeEtcd:
