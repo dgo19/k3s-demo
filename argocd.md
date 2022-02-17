@@ -16,7 +16,6 @@ serviceaccount/argocd-redis created
 serviceaccount/argocd-server created
 role.rbac.authorization.k8s.io/argocd-application-controller created
 role.rbac.authorization.k8s.io/argocd-dex-server created
-role.rbac.authorization.k8s.io/argocd-redis created
 role.rbac.authorization.k8s.io/argocd-server created
 clusterrole.rbac.authorization.k8s.io/argocd-application-controller created
 clusterrole.rbac.authorization.k8s.io/argocd-server created
@@ -27,6 +26,7 @@ rolebinding.rbac.authorization.k8s.io/argocd-server created
 clusterrolebinding.rbac.authorization.k8s.io/argocd-application-controller created
 clusterrolebinding.rbac.authorization.k8s.io/argocd-server created
 configmap/argocd-cm created
+configmap/argocd-cmd-params-cm created
 configmap/argocd-gpg-keys-cm created
 configmap/argocd-rbac-cm created
 configmap/argocd-ssh-known-hosts-cm created
@@ -43,6 +43,10 @@ deployment.apps/argocd-redis created
 deployment.apps/argocd-repo-server created
 deployment.apps/argocd-server created
 statefulset.apps/argocd-application-controller created
+sealedsecret.bitnami.com/argocd-secret created
+servicemonitor.monitoring.coreos.com/argocd-metrics created
+servicemonitor.monitoring.coreos.com/argocd-repo-server-metrics created
+servicemonitor.monitoring.coreos.com/argocd-server-metrics created
 ingress.networking.k8s.io/ingress-argocd-server created
 networkpolicy.networking.k8s.io/argocd-application-controller-network-policy created
 networkpolicy.networking.k8s.io/argocd-dex-server-network-policy created
@@ -54,18 +58,20 @@ verify the pods are running and review the deployment
 ```
 $ kubectl -n argocd get pods
 NAME                                  READY   STATUS              RESTARTS   AGE
-argocd-dex-server-7946bfbf79-5wjcq    0/1     Init:0/1            0          39s
-argocd-redis-7547547c4f-c6xq8         0/1     ContainerCreating   0          39s
-argocd-repo-server-6b5cf77fbc-hfdqj   0/1     ContainerCreating   0          39s
-argocd-server-86f7f94488-hkmzv        0/1     ContainerCreating   0          39s
-argocd-application-controller-0       0/1     ContainerCreating   0          39s
+argocd-dex-server-5b46f9bcd4-hrbcq    0/1     Init:0/1            0          20s
+argocd-redis-d486999b7-mlthc          0/1     ContainerCreating   0          20s
+argocd-repo-server-6986455545-gglqp   0/1     Init:0/1            0          20s
+argocd-server-7865d5ff6d-6h7xg        0/1     ContainerCreating   0          20s
+argocd-application-controller-0       0/1     ContainerCreating   0          20s
+
 $ kubectl -n argocd get pods
 NAME                                  READY   STATUS    RESTARTS   AGE
-argocd-redis-7547547c4f-c6xq8         1/1     Running   0          63s
-argocd-dex-server-7946bfbf79-5wjcq    1/1     Running   0          63s
-argocd-repo-server-6b5cf77fbc-hfdqj   1/1     Running   0          63s
-argocd-server-86f7f94488-hkmzv        1/1     Running   0          63s
-argocd-application-controller-0       1/1     Running   0          63s
+argocd-redis-d486999b7-mlthc          1/1     Running   0          106s
+argocd-server-7865d5ff6d-6h7xg        1/1     Running   0          106s
+argocd-application-controller-0       1/1     Running   0          106s
+argocd-dex-server-5b46f9bcd4-hrbcq    1/1     Running   0          106s
+argocd-repo-server-6986455545-gglqp   1/1     Running   0          106s
+
 $ kubectl -n argocd get svc
 argocd-dex-server       ClusterIP   10.43.252.201   <none>        5556/TCP,5557/TCP,5558/TCP   89s
 argocd-metrics          ClusterIP   10.43.155.73    <none>        8082/TCP                     89s
@@ -73,13 +79,14 @@ argocd-redis            ClusterIP   10.43.116.214   <none>        6379/TCP      
 argocd-repo-server      ClusterIP   10.43.53.121    <none>        8081/TCP,8084/TCP            89s
 argocd-server           ClusterIP   10.43.115.0     <none>        80/TCP,443/TCP               89s
 argocd-server-metrics   ClusterIP   10.43.3.109     <none>        8083/TCP                     89s
+
 $ kubectl -n argocd get ingress
 NAME                    CLASS    HOSTS                ADDRESS         PORTS   AGE
 ingress-argocd-server   <none>   argocd.k3sdemo.lan   192.168.0.133   80      112s
 ```
 Download the commandline client
 ```
-$ curl -L -o ~/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v2.0.4/argocd-linux-amd64
+$ curl -L -o ~/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v2.2.5/argocd-linux-amd64
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   626  100   626    0     0   2454      0 --:--:-- --:--:-- --:--:--  2454
