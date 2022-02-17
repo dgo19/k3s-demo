@@ -16,7 +16,7 @@ kube-prometheus-stack:
                 storage: "2Gi"
   grafana:
     ingress:
-      enabled: "true"
+      enabled: true
       ingressClassName: nginx
       hosts:
         - grafana.k3sdemo.lan
@@ -92,23 +92,19 @@ kube-prometheus-stack:
     plugins:
       - grafana-piechart-panel
   kubeApiServer:
-    enabled: "true"
+    enabled: true
   kubeControllerManager:
-    enabled: "false"
-    service:
-      enabled: "false"
-    serviceMonitor:
-      enabled: "false"
+    enabled: false
   kubeDns:
-    enabled: "false"
+    enabled: false
   kubeEtcd:
-    enabled: "false"
+    enabled: false
   kubelet:
-    enabled: "true"
+    enabled: true
   kubeProxy:
-    enabled: "false"
+    enabled: false
   kubeScheduler:
-    enabled: "false"
+    enabled: false
   kube-state-metrics:
     prometheus:
       monitor:
@@ -119,7 +115,7 @@ kube-prometheus-stack:
         enabled: true
   prometheus:
     ingress:
-      enabled: "true"
+      enabled: true
       ingressClassName: nginx
       hosts:
         - prometheus.k3sdemo.lan
