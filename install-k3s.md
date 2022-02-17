@@ -1,13 +1,70 @@
+## Install required packages (example for ubuntu and debian)
+```
+$ sudo apt -y install git sudo curl apache2-utils
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+sudo is already the newest version (1.9.5p2-3ubuntu2).
+sudo set to manually installed.
+The following additional packages will be installed:
+  git-man libapr1 libaprutil1 liberror-perl
+Suggested packages:
+  git-daemon-run | git-daemon-sysvinit git-doc git-email git-gui gitk gitweb git-cvs git-mediawiki git-svn
+The following NEW packages will be installed:
+  apache2-utils curl git git-man libapr1 libaprutil1 liberror-perl
+0 upgraded, 7 newly installed, 0 to remove and 144 not upgraded.
+Need to get 4.463 kB of archives.
+After this operation, 21,8 MB of additional disk space will be used.
+Get:1 http://de.archive.ubuntu.com/ubuntu impish/main amd64 libapr1 amd64 1.7.0-6ubuntu1 [107 kB]
+Get:2 http://de.archive.ubuntu.com/ubuntu impish/main amd64 libaprutil1 amd64 1.6.1-5ubuntu2 [84,6 kB]
+Get:3 http://de.archive.ubuntu.com/ubuntu impish-updates/main amd64 apache2-utils amd64 2.4.48-3.1ubuntu3.2 [88,9 kB]
+Get:4 http://de.archive.ubuntu.com/ubuntu impish/main amd64 curl amd64 7.74.0-1.3ubuntu2 [179 kB]
+Get:5 http://de.archive.ubuntu.com/ubuntu impish/main amd64 liberror-perl all 0.17029-1 [26,5 kB]
+Get:6 http://de.archive.ubuntu.com/ubuntu impish/main amd64 git-man all 1:2.32.0-1ubuntu1 [941 kB]
+Get:7 http://de.archive.ubuntu.com/ubuntu impish/main amd64 git amd64 1:2.32.0-1ubuntu1 [3.036 kB]
+Fetched 4.463 kB in 1s (5.494 kB/s)
+Selecting previously unselected package libapr1:amd64.
+(Reading database ... 182898 files and directories currently installed.)
+Preparing to unpack .../0-libapr1_1.7.0-6ubuntu1_amd64.deb ...
+Unpacking libapr1:amd64 (1.7.0-6ubuntu1) ...
+Selecting previously unselected package libaprutil1:amd64.
+Preparing to unpack .../1-libaprutil1_1.6.1-5ubuntu2_amd64.deb ...
+Unpacking libaprutil1:amd64 (1.6.1-5ubuntu2) ...
+Selecting previously unselected package apache2-utils.
+Preparing to unpack .../2-apache2-utils_2.4.48-3.1ubuntu3.2_amd64.deb ...
+Unpacking apache2-utils (2.4.48-3.1ubuntu3.2) ...
+Selecting previously unselected package curl.
+Preparing to unpack .../3-curl_7.74.0-1.3ubuntu2_amd64.deb ...
+Unpacking curl (7.74.0-1.3ubuntu2) ...
+Selecting previously unselected package liberror-perl.
+Preparing to unpack .../4-liberror-perl_0.17029-1_all.deb ...
+Unpacking liberror-perl (0.17029-1) ...
+Selecting previously unselected package git-man.
+Preparing to unpack .../5-git-man_1%3a2.32.0-1ubuntu1_all.deb ...
+Unpacking git-man (1:2.32.0-1ubuntu1) ...
+Selecting previously unselected package git.
+Preparing to unpack .../6-git_1%3a2.32.0-1ubuntu1_amd64.deb ...
+Unpacking git (1:2.32.0-1ubuntu1) ...
+Setting up libapr1:amd64 (1.7.0-6ubuntu1) ...
+Setting up liberror-perl (0.17029-1) ...
+Setting up git-man (1:2.32.0-1ubuntu1) ...
+Setting up curl (7.74.0-1.3ubuntu2) ...
+Setting up libaprutil1:amd64 (1.6.1-5ubuntu2) ...
+Setting up git (1:2.32.0-1ubuntu1) ...
+Setting up apache2-utils (2.4.48-3.1ubuntu3.2) ...
+Processing triggers for man-db (2.9.4-2) ...
+Processing triggers for libc-bin (2.34-0ubuntu3) ...
+```
 ## Installation of k3s
 We install a specific version of k3s. It has been tested for this demo. You can install the latest version by omitting the INSTALL_K3s_VERSION variable or choose a version.
 ```
 $ curl -sfL https://get.k3s.io | sudo INSTALL_K3S_VERSION="v1.22.6+k3s1" INSTALL_K3S_EXEC="server --disable traefik" sh -
-[INFO]  Finding release for channel stable
-[INFO]  Using v1.21.2+k3s1 as release
-[INFO]  Downloading hash https://github.com/k3s-io/k3s/releases/download/v1.21.2+k3s1/sha256sum-amd64.txt
-[INFO]  Downloading binary https://github.com/k3s-io/k3s/releases/download/v1.21.2+k3s1/k3s
+[INFO]  Using v1.22.6+k3s1 as release
+[INFO]  Downloading hash https://github.com/k3s-io/k3s/releases/download/v1.22.6+k3s1/sha256sum-amd64.txt
+[INFO]  Downloading binary https://github.com/k3s-io/k3s/releases/download/v1.22.6+k3s1/k3s
 [INFO]  Verifying binary download
 [INFO]  Installing k3s to /usr/local/bin/k3s
+[INFO]  Skipping installation of SELinux RPM
 [INFO]  Creating /usr/local/bin/kubectl symlink to k3s
 [INFO]  Creating /usr/local/bin/crictl symlink to k3s
 [INFO]  Creating /usr/local/bin/ctr symlink to k3s
@@ -27,22 +84,36 @@ $ sudo chown ${UID} ~/.kube/config
 $ echo "alias kubectl='k3s kubectl'" >> ~/.bashrc
 $ echo "export KUBECONFIG=~/.kube/config" >> ~/.bashrc
 $ echo 'source <(k3s kubectl completion bash)' >> ~/.bashrc
+$ source .bashrc
 ```
 Get kustomize
 ```
 $ mkdir ~/bin
-$ curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.2.0/kustomize_v4.2.0_linux_amd64.tar.gz | tar xvzC ~/bin -f -
+$ source .profile
+$ curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.5.2/kustomize_v4.5.2_linux_amd64.tar.gz | tar xvzC ~/bin -f -
+ % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   674  100   674    0     0   2717      0 --:--:-- --:--:-- --:--:--  2717
+  0 4525k    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0kustomize
+100 4525k  100 4525k    0     0  4467k      0  0:00:01  0:00:01 --:--:-- 10.3M
 ```
 Get Helm
 ```
-$ curl -L https://get.helm.sh/helm-v3.6.3-linux-amd64.tar.gz | tar xvzC ~/bin --strip-components 1 -f - linux-amd64/helm
+$ curl -L https://get.helm.sh/helm-v3.8.0-linux-amd64.tar.gz | tar xvzC ~/bin --strip-components 1 -f - linux-amd64/helm
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0linux-amd64/helm
+100 12.9M  100 12.9M    0     0  9923k      0  0:00:01  0:00:01 --:--:-- 9930k
 ```
 Get kubeseal
 ```
-$ curl -L https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.16.0/kubeseal-linux-amd64 > ~/bin/kubeseal
-$ chmod +x ~/bin/kubeseal
+$ curl -L https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.17.3/kubeseal-0.17.3-linux-amd64.tar.gz | tar xvzC ~/bin -f - kubeseal
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   671  100   671    0     0   9450      0 --:--:-- --:--:-- --:--:--  9319
+kubeseal
+100 14.6M  100 14.6M    0     0  7647k      0  0:00:01  0:00:01 --:--:-- 10.0M
 ```
-Re-enter user session.
 
 ## Wildcard DNS for ingress
 Add wildcard DNS entry for ingress:
@@ -85,6 +156,13 @@ $ cat /proc/sys/fs/inotify/max_user_instances
 ## Clone git Repo
 ```
 $ git clone https://github.com/dgo19/k3s-demo.git ~/k3s-demo
+Cloning into '/home/dgo/k3s-demo'...
+remote: Enumerating objects: 1134, done.
+remote: Counting objects: 100% (1134/1134), done.
+remote: Compressing objects: 100% (808/808), done.
+remote: Total 1134 (delta 693), reused 753 (delta 314), pack-reused 0
+Receiving objects: 100% (1134/1134), 193.97 KiB | 3.40 MiB/s, done.
+Resolving deltas: 100% (693/693), done.
 ```
 ## Installation of sealed-secrets
 Create the namespace for sealed-secrets, the secret for the sealed-secrets key and the needed label.
@@ -104,20 +182,43 @@ sealed-secrets-key    kubernetes.io/tls                     2      14s   sealeds
 Deploy sealed-secrets.
 ```
 $ kubectl apply -k .
-customresourcedefinition.apiextensions.k8s.io/sealedsecrets.bitnami.com unchanged
+customresourcedefinition.apiextensions.k8s.io/sealedsecrets.bitnami.com created
 serviceaccount/sealed-secrets-controller created
-Warning: rbac.authorization.k8s.io/v1beta1 Role is deprecated in v1.17+, unavailable in v1.22+; use rbac.authorization.k8s.io/v1 Role
 role.rbac.authorization.k8s.io/sealed-secrets-key-admin created
 role.rbac.authorization.k8s.io/sealed-secrets-service-proxier created
-Warning: rbac.authorization.k8s.io/v1beta1 ClusterRole is deprecated in v1.17+, unavailable in v1.22+; use rbac.authorization.k8s.io/v1 ClusterRole
 clusterrole.rbac.authorization.k8s.io/secrets-unsealer created
-Warning: rbac.authorization.k8s.io/v1beta1 RoleBinding is deprecated in v1.17+, unavailable in v1.22+; use rbac.authorization.k8s.io/v1 RoleBinding
 rolebinding.rbac.authorization.k8s.io/sealed-secrets-controller created
 rolebinding.rbac.authorization.k8s.io/sealed-secrets-service-proxier created
-Warning: rbac.authorization.k8s.io/v1beta1 ClusterRoleBinding is deprecated in v1.17+, unavailable in v1.22+; use rbac.authorization.k8s.io/v1 ClusterRoleBinding
 clusterrolebinding.rbac.authorization.k8s.io/sealed-secrets-controller created
 service/sealed-secrets-controller created
 deployment.apps/sealed-secrets-controller created
+ingress.networking.k8s.io/sealed-secrets created
+```
+## Installation of kube-prometheus-stack for monitoring
+```
+$ cd ~/k3s-demo/applications/monitoring
+$ helm install --dependency-update monitoring . -n monitoring --create-namespace
+Getting updates for unmanaged Helm repositories...
+...Successfully got an update from the "https://prometheus-community.github.io/helm-charts" chart repository
+Saving 1 charts
+Downloading kube-prometheus-stack from repo https://prometheus-community.github.io/helm-charts
+Deleting outdated charts
+NAME: monitoring
+LAST DEPLOYED: Thu Feb 17 18:15:51 2022
+NAMESPACE: monitoring
+STATUS: deployed
+REVISION: 1
+```
+Check for running pods. This can take a few minutes to complete.
+```
+$ kubectl -n monitoring get pods
+NAME                                                     READY   STATUS    RESTARTS   AGE
+monitoring-prometheus-node-exporter-2mc7z                1/1     Running   0          61s
+monitoring-kube-prometheus-operator-b645ccdc5-8rxhn      1/1     Running   0          61s
+monitoring-kube-state-metrics-6876c96df5-r66xz           1/1     Running   0          60s
+alertmanager-monitoring-kube-prometheus-alertmanager-0   2/2     Running   0          54s
+prometheus-monitoring-kube-prometheus-prometheus-0       2/2     Running   0          54s
+monitoring-grafana-59b4bd7697-hps5p                      3/3     Running   0          61s
 ```
 ## Installation of ingress nginx
 Trust Ingress Certificate
@@ -140,11 +241,13 @@ clusterrole.rbac.authorization.k8s.io/ingress-nginx created
 clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx created
 role.rbac.authorization.k8s.io/ingress-nginx created
 rolebinding.rbac.authorization.k8s.io/ingress-nginx created
+service/ingress-nginx-controller-metrics created
 service/ingress-nginx-controller-admission created
 service/ingress-nginx-controller created
 daemonset.apps/ingress-nginx-controller created
 ingressclass.networking.k8s.io/nginx created
 sealedsecret.bitnami.com/tls-secret created
+servicemonitor.monitoring.coreos.com/ingress-nginx-controller created
 validatingwebhookconfiguration.admissionregistration.k8s.io/ingress-nginx-admission created
 serviceaccount/ingress-nginx-admission created
 clusterrole.rbac.authorization.k8s.io/ingress-nginx-admission created
@@ -157,24 +260,20 @@ job.batch/ingress-nginx-admission-patch created
 Check for running pods. This can take a few minutes to complete.
 ```
 $ kubectl -n ingress-nginx get pods
-NAME                                       READY   STATUS      RESTARTS   AGE
-ingress-nginx-admission-create-mjf8k       0/1     Completed   0          86s
-ingress-nginx-admission-patch-gdfq8        0/1     Completed   0          86s
-ingress-nginx-controller-754c9d47b-t48wm   1/1     Running     0          86s
+NAME                                      READY   STATUS      RESTARTS   AGE
+ingress-nginx-admission-create--1-rwzjr   0/1     Completed   0          69s
+ingress-nginx-admission-patch--1-h9rmk    0/1     Completed   1          69s
+ingress-nginx-controller-5cd4h            1/1     Running     0          69s
 
-$ kubectl -n ingress-nginx get deployment
-NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
-ingress-nginx-controller   1/1     1            1           111s
-
-$ kubectl -n ingress-nginx get replicaset
-NAME                                 DESIRED   CURRENT   READY   AGE
-ingress-nginx-controller-754c9d47b   1         1         1       115s
+$ kubectl -n ingress-nginx get daemonset
+NAME                       DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+ingress-nginx-controller   1         1         1       1            1           kubernetes.io/os=linux   113s
 
 $ kubectl -n ingress-nginx get pods -o wide
-NAME                                       READY   STATUS      RESTARTS   AGE    IP              NODE             NOMINATED NODE   READINESS GATES
-ingress-nginx-admission-create-mjf8k       0/1     Completed   0          2m4s   10.42.0.9       dgo-virtualbox   <none>           <none>
-ingress-nginx-admission-patch-gdfq8        0/1     Completed   0          2m4s   10.42.0.8       dgo-virtualbox   <none>           <none>
-ingress-nginx-controller-754c9d47b-t48wm   1/1     Running     0          2m4s   192.168.0.133   dgo-virtualbox   <none>           <none>
+AME                                      READY   STATUS      RESTARTS   AGE    IP              NODE             NOMINATED NODE   READINESS GATES
+ingress-nginx-admission-create--1-rwzjr   0/1     Completed   0          3m8s   10.42.0.18      dgo-virtualbox   <none>           <none>
+ingress-nginx-admission-patch--1-h9rmk    0/1     Completed   1          3m8s   10.42.0.17      dgo-virtualbox   <none>           <none>
+ingress-nginx-controller-5cd4h            1/1     Running     0          3m8s   192.168.0.133   dgo-virtualbox   <none>           <none>
 ```
 ```
 $ curl -v http://localhost
@@ -187,7 +286,7 @@ $ curl -v http://localhost
 > 
 * Mark bundle as not supporting multiuse
 < HTTP/1.1 404 Not Found
-< Date: Sun, 18 Jul 2021 14:39:21 GMT
+< Date: Thu, 17 Feb 2022 17:22:48 GMT
 < Content-Type: text/html
 < Content-Length: 146
 < Connection: keep-alive
@@ -225,11 +324,11 @@ $ curl -kv https://localhost
 *  start date: Jul 18 14:34:03 2021 GMT
 *  expire date: Jul 16 14:34:03 2031 GMT
 *  issuer: C=US; ST=VA; L=SomeCity; O=MyCompany; OU=MyDivision; CN=*.k3sdemo.lan
-*  SSL certificate verify result: self signed certificate (18), continuing anyway.
+*  SSL certificate verify ok.
 * Using HTTP2, server supports multi-use
 * Connection state changed (HTTP/2 confirmed)
 * Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
-* Using Stream ID: 1 (easy handle 0x5643ac0ce580)
+* Using Stream ID: 1 (easy handle 0x55d6e77ac5c0)
 > GET / HTTP/2
 > Host: localhost
 > user-agent: curl/7.74.0
@@ -240,7 +339,7 @@ $ curl -kv https://localhost
 * old SSL session ID is stale, removing
 * Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
 < HTTP/2 404 
-< date: Sun, 18 Jul 2021 14:39:42 GMT
+< date: Thu, 17 Feb 2022 17:23:52 GMT
 < content-type: text/html
 < content-length: 146
 < strict-transport-security: max-age=15724800; includeSubDomains
@@ -253,45 +352,3 @@ $ curl -kv https://localhost
 </body>
 </html>
 * Connection #0 to host localhost left intact
-```
-## Installation of kube-prometheus-stack for monitoring
-```
-$ cd ~/k3s-demo/applications/monitoring
-$ helm install --dependency-update monitoring . -n monitoring --create-namespace
-W0718 20:04:32.742398  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:32.743791  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:32.744975  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:32.746212  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:32.747503  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:32.748662  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:32.749832  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:32.999991  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:33.100576  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:34.668566  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:34.706017  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:34.706484  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:34.706644  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:34.707124  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:34.708312  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:34.708953  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:34.709917  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:36.433685  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:36.590896  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-W0718 20:04:44.871114  219497 warnings.go:70] policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
-NAME: monitoring
-LAST DEPLOYED: Sun Jul 18 20:04:31 2021
-NAMESPACE: monitoring
-STATUS: deployed
-REVISION: 1
-```
-Check for running pods. This can take a few minutes to complete.
-```
-$ kubectl -n monitoring get pods
-NAME                                                     READY   STATUS    RESTARTS   AGE
-monitoring-kube-prometheus-operator-656bdb8465-92hbb     1/1     Running   0          4m59s
-monitoring-prometheus-node-exporter-zsddb                1/1     Running   0          4m59s
-monitoring-grafana-685d8776c7-5qhzv                      2/2     Running   0          4m59s
-alertmanager-monitoring-kube-prometheus-alertmanager-0   2/2     Running   0          4m58s
-prometheus-monitoring-kube-prometheus-prometheus-0       2/2     Running   1          4m58s
-monitoring-kube-state-metrics-85d69795b9-4x9s6           1/1     Running   0          4m59s
-```

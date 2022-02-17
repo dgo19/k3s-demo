@@ -2,13 +2,14 @@
 
 ## Requirements
 - linux distribution
-- 20 GB in /var
+- 30 GB in /var (40 GB total disk size)
 - 6 GB RAM
 - 2 Cores
 - addition packages
   - curl
   - git
   - sudo
+  - apache2-utils
 
 [Installation of k3s](install-k3s.md)
 
