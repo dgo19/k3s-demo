@@ -7,7 +7,6 @@ resources:
   - namespace-test-nginx-dev.yaml
   - pipeline-kaniko-pipeline.yaml
   - pipelinerun-test-nginx.yaml
-  - pvc-test-nginx-build.yaml
   - sealedsecret-registry-auth.yaml
   - https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-clone/0.5/git-clone.yaml
   - https://raw.githubusercontent.com/tektoncd/catalog/main/task/kaniko/0.5/kaniko.yaml
