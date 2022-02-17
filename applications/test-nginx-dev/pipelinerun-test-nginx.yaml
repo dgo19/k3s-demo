@@ -2,8 +2,6 @@ apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
   name: test-nginx
-  annotations:
-    argocd.argoproj.io/sync-wave: "50"
 spec:
   pipelineRef:
     name: kaniko-pipeline
