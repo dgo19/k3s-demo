@@ -4,11 +4,10 @@ kind: Kustomization
 namespace: mariadb-pv
 
 resources:
-  - deployment-mariadb-pv.yaml
+  - statefulset-mariadb-pv.yaml
   - deployment-phpmyadmin.yaml
   - ingress-phpmyadmin.yaml
   - namespace-mariadb-pv.yaml
-  - pvc-mariadb.yaml
   - sealedsecret-mariadb-secret.yaml
   - service-mariadb.yaml
   - service-phpmyadmin.yaml
