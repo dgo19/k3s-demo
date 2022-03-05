@@ -68,9 +68,6 @@ spec:
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       volumes:
-      - name: registry-storage
-        persistentVolumeClaim:
-          claimName: pvc-registry
       - name: certs
         secret:
           secretName: registry-tls
@@ -84,7 +81,7 @@ spec:
       terminationGracePeriodSeconds: 30
   volumeClaimTemplates:
   - metadata:
-      name: pvc-registry
+      name: registry-storage
     spec:
       storageClassName: local-path
       accessModes:
