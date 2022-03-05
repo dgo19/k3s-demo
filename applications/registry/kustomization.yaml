@@ -4,13 +4,12 @@ kind: Kustomization
 namespace: registry
 
 resources:
-  - deployment-registry.yaml
   - ingress-registry.yaml
   - namespace-registry.yaml
-  - pvc-registry.yaml
   - sealedsecret-registry-auth.yaml
   - sealedsecret-registry-tls.yaml
   - service-registry.yaml
+  - statefulset-registry.yaml
 
 configMapGenerator:
   - name: registry-conf

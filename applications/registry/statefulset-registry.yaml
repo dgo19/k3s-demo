@@ -1,18 +1,15 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app: registry
   name: registry
 spec:
-  progressDeadlineSeconds: 600
   replicas: 1
-  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: registry
-  strategy:
-    type: Recreate
+  serviceName: registry
   template:
     metadata:
       labels:
@@ -85,3 +82,13 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
+  volumeClaimTemplates:
+  - metadata:
+      name: pvc-registry
+    spec:
+      storageClassName: local-path
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Gi
