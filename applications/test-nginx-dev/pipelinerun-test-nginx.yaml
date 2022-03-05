@@ -21,12 +21,15 @@ spec:
   workspaces:
     - name: git-source
       volumeClaimTemplate:
+        metadata:
+          creationTimestamp: null
         spec:
           accessModes:
           - ReadWriteOnce
           resources:
             requests:
               storage: 1Gi
+        status: {}
     - name: dockerconfig
       secret:
         secretName: registry-auth
