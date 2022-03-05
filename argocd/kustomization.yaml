@@ -20,6 +20,7 @@ resources:
   - ingress-argocd.yaml
   - namespace-argocd.yaml
   - sealedsecret-argocd-secret.yaml
+  - sealedsecret-repo-dgo19-k3s-demo.yaml
   - servicemonitor-argocd-metrics.yaml
   - servicemonitor-argocd-server-metrics.yaml
   - servicemonitor-argocd-repo-server-metrics.yaml
