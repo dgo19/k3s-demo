@@ -10,8 +10,6 @@ spec:
     matchLabels:
       app: mariadb
   serviceName: mariadb
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
