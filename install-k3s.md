@@ -84,12 +84,12 @@ $ sudo chown ${UID} ~/.kube/config
 $ echo "alias kubectl='k3s kubectl'" >> ~/.bashrc
 $ echo "export KUBECONFIG=~/.kube/config" >> ~/.bashrc
 $ echo 'source <(k3s kubectl completion bash)' >> ~/.bashrc
-$ source .bashrc
+$ source ~/.bashrc
 ```
 Get kustomize
 ```
 $ mkdir ~/bin
-$ source .profile
+$ source ~/.profile
 $ curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.5.2/kustomize_v4.5.2_linux_amd64.tar.gz | tar xvzC ~/bin -f -
  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
