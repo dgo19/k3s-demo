@@ -1,0 +1,54 @@
+---
+- name: check kustomize install status
+  ansible.builtin.stat:
+    path: ~/bin/kustomize
+  register: kustomize_bin
+
+- name: check kustomize version
+  shell: "~/bin/kustomize version"
+  register: kustomize_bin_v
+  changed_when: 0
+  when: kustomize_bin.stat.exists == true
+
+- name: register kustomize version
+  set_fact:
+    kustomize_bin_version: "{{ kustomize_bin_v.stdout | regex_search('Version:kustomize\/(v[0-9.]+) ','\\1') | first }}"
+  when: kustomize_bin.stat.exists == true and kustomize_bin_v | length > 0
+
+- debug:
+    var: kustomize_bin_version
+
+- name: create tempdir for download
+  tempfile:
+    state: directory
+    suffix: kustomize
+  register: tempdir
+  when: (kustomize_bin.stat.exists == false) or ((kustomize_bin.stat.exists == true) and (kustomize_bin_version != kustomize_version))
+
+- name: download kustomize archive
+  get_url:
+    url: "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F{{ kustomize_version }}/kustomize_{{ kustomize_version }}_linux_amd64.tar.gz"
+    dest: "{{ tempdir.path }}/kustomize.tar.gz"
+    mode: "0750"
+  when: (kustomize_bin.stat.exists == false) or ((kustomize_bin.stat.exists == true) and (kustomize_bin_version != kustomize_version))
+
+- name: unarchive kustomize download
+  unarchive:
+    src: "{{ tempdir.path }}/kustomize.tar.gz"
+    dest: "{{ tempdir.path }}"
+    remote_src: yes
+  when: (kustomize_bin.stat.exists == false) or ((kustomize_bin.stat.exists == true) and (kustomize_bin_version != kustomize_version))
+
+- name: copy kustomize to ~/bin
+  copy:
+    src: "{{ tempdir.path }}/kustomize"
+    dest: "~/bin/kustomize"
+    mode: "0755"
+    remote_src: yes
+  when: (kustomize_bin.stat.exists == false) or ((kustomize_bin.stat.exists == true) and (kustomize_bin_version != kustomize_version))
+
+- name: remove tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent
+  when: tempdir.path is defined

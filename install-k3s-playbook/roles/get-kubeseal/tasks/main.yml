@@ -1,0 +1,58 @@
+---
+- name: check kubeseal install status
+  ansible.builtin.stat:
+    path: ~/bin/kubeseal
+  register: kubeseal_bin
+
+- name: check kubeseal version
+  shell: "~/bin/kubeseal --version"
+  register: kubeseal_bin_v
+  changed_when: 0
+  when: kubeseal_bin.stat.exists == true
+
+- name: register kubeseal version
+  set_fact:
+    kubeseal_bin_version: "{{ kubeseal_bin_v.stdout | regex_search('version: (v[0-9.]+)','\\1') }}"
+  when: kubeseal_bin.stat.exists == true and kubeseal_bin_v | length > 0
+
+- name: register kubeseal version without v
+  set_fact:
+    kubeseal_versionwov: "{{ kubeseal_version | regex_search('v([0-9.]+)','\\1') | first }}"
+
+- debug:
+    var: kubeseal_bin_version
+
+- name: create tempdir for download
+  tempfile:
+    state: directory
+    suffix: kubeseal
+  register: tempdir
+  when: (kubeseal_bin.stat.exists == false) or ((kubeseal_bin.stat.exists == true) and (kubeseal_bin_version != kubeseal_versionwov))
+
+- name: download kubeseal archive
+  get_url:
+    url: "https://github.com/bitnami-labs/sealed-secrets/releases/download/{{ kubeseal_version }}/kubeseal-{{ kubeseal_versionwov }}-linux-amd64.tar.gz"
+    dest: "{{ tempdir.path }}/kubeseal.tar.gz"
+    mode: "0750"
+  when: (kubeseal_bin.stat.exists == false) or ((kubeseal_bin.stat.exists == true) and (kubeseal_bin_version != kubeseal_versionwov))
+
+- name: unarchive kubeseal download
+  unarchive:
+    src: "{{ tempdir.path }}/kubeseal.tar.gz"
+    dest: "{{ tempdir.path }}"
+    remote_src: yes
+  when: (kubeseal_bin.stat.exists == false) or ((kubeseal_bin.stat.exists == true) and (kubeseal_bin_version != kubeseal_versionwov))
+
+- name: copy kubeseal to ~/bin
+  copy:
+    src: "{{ tempdir.path }}/kubeseal"
+    dest: "~/bin/kubeseal"
+    mode: "0755"
+    remote_src: yes
+  when: (kubeseal_bin.stat.exists == false) or ((kubeseal_bin.stat.exists == true) and (kubeseal_bin_version != kubeseal_versionwov))
+
+- name: remove tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent
+  when: tempdir.path is defined
