@@ -1,0 +1,40 @@
+---
+- name: check for sealed-secrets namespace
+  shell: "kubectl get namespace sealed-secrets"
+  changed_when: 0
+  register: namespace_sealed_secrets
+  failed_when: "namespace_sealed_secrets.rc not in [ 0, 1 ]"
+
+- name: create sealed-secrets namespace
+  shell: "kubectl create namespace sealed-secrets"
+  when: namespace_sealed_secrets.rc == 1
+
+- name: check for sealed-secrets tls secret
+  shell: "kubectl -n sealed-secrets get secret sealed-secrets-key"
+  changed_when: 0
+  register: secret_sealed_secrets
+  failed_when: "secret_sealed_secrets.rc not in [ 0, 1 ]"
+
+- name: create sealed-secrets tls secret
+  shell: "kubectl -n sealed-secrets create secret tls sealed-secrets-key --cert={{ playbook_dir }}/../applications/sealed-secrets/sealed-secrets.crt --key={{ playbook_dir }}/../applications/sealed-secrets/sealed-secrets.key"
+  when: secret_sealed_secrets.rc == 1
+
+- name: check for sealed-secrets secret label
+  shell: "kubectl -n sealed-secrets get secret -l sealedsecrets.bitnami.com/sealed-secrets-key=active -o name"
+  changed_when: 0
+  register: secret_sealed_secrets_label
+  failed_when: "secret_sealed_secrets_label.rc not in [ 0, 1 ]"
+
+- name: create sealed-secrets secret label
+  shell: "kubectl -n sealed-secrets label secret sealed-secrets-key sealedsecrets.bitnami.com/sealed-secrets-key=active"
+  when: (secret_sealed_secrets_label.rc == 1) or ("secret/sealed-secrets-key" not in secret_sealed_secrets_label.stdout)
+
+- name: check for sealed-secrets deployment
+  shell: "kubectl -n sealed-secrets get deployment sealed-secrets-controller"
+  changed_when: 0
+  register: deployment_sealed_secrets
+  failed_when: "deployment_sealed_secrets.rc not in [ 0, 1 ]"
+
+- name: create sealed-secrets deployment
+  shell: "kubectl apply -k {{ playbook_dir }}/../applications/sealed-secrets"
+  when: deployment_sealed_secrets.rc == 1

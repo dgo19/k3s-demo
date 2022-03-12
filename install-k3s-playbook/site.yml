@@ -1,2 +1,3 @@
 ---
 - import_playbook: install-k3s.yml
+- import_playbook: install-system-apps.yml
