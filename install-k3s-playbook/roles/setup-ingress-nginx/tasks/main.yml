@@ -18,3 +18,11 @@
 - name: deploy ingress-nginx
   shell: "~/bin/helm template ingress-nginx {{ playbook_dir }}/../applications/ingress-nginx -n ingress-nginx --create-namespace | kubectl apply -f -"
   when: (namespace_ingress_nginx.rc == 1) or (daemonset_ingress_nginx.rc == 1)
+
+- name: wait for ingress-nginx to become ready
+  shell: "kubectl -n ingress-nginx wait --for=condition=ready pod -l app.kubernetes.io/component=controller"
+  changed_when: 0
+  register: wait_ingress
+  until: wait_ingress.rc == 0
+  delay: 10
+  retries: 30
