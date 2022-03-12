@@ -10,3 +10,4 @@
     - get-helm
     - get-kubeseal
     - get-argocd
+    - hosts
