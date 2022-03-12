@@ -7,7 +7,7 @@
 - name: check argocd version
   shell: "~/bin/argocd version"
   register: argocd_bin_v
-  failed_when: "argocd_bin_v.rc not in [ 0, 1 ]"
+  failed_when: 0
   changed_when: 0
   when: argocd_bin.stat.exists == true
 
