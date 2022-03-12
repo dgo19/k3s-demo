@@ -34,3 +34,17 @@
 - name: deploy argocd app of apps
   shell: "kubectl apply -f {{ playbook_dir }}/../applications/applications.yaml"
   when: (app_argocd_app.rc == 1)
+
+- name: wait for argocd to become ready
+  shell: "kubectl -n argocd wait --for=condition=ready pod -l app.kubernetes.io/name={{ item }}"
+  changed_when: 0
+  register: wait_argocd
+  until: wait_argocd.rc == 0
+  delay: 10
+  retries: 30
+  loop:
+    - argocd-redis
+    - argocd-dex-server
+    - argocd-repo-server
+    - argocd-application-controller
+    - argocd-server
