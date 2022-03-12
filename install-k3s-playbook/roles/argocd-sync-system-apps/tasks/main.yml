@@ -1,0 +1,33 @@
+---
+- name: login to argocd
+  shell: "~/bin/argocd login --username admin --password admin argocd.k3sdemo.lan"
+
+- name: refresh argocd app
+  shell: "~/bin/argocd app get argocd --hard-refresh"
+
+- name: sync argocd app
+  shell: "~/bin/argocd app sync argocd --prune"
+
+- name: refresh app of apps
+  shell: "~/bin/argocd app get applications --hard-refresh"
+
+- name: sync app of apps
+  shell: "~/bin/argocd app sync applications --prune"
+
+- name: sync monitoring
+  shell: "~/bin/argocd app sync monitoring --prune"
+
+- name: sync kubernetes-dashboard
+  shell: "~/bin/argocd app sync kubernetes-dashboard --prune"
+
+- name: sync kubernetes-dashboard
+  shell: "~/bin/argocd app sync kubernetes-dashboard --prune"
+
+- name: sync loki
+  shell: "~/bin/argocd app sync loki --prune"
+
+- name: sync sealed-secrets
+  shell: "~/bin/argocd app sync sealed-secrets --prune"
+
+- name: sync ingress-nginx
+  shell: "~/bin/argocd app sync ingress-nginx --prune"

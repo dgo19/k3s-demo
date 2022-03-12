@@ -1,3 +1,4 @@
 ---
 - import_playbook: install-k3s.yml
 - import_playbook: install-system-apps.yml
+- import_playbook: argocd-sync-system-apps.yml
