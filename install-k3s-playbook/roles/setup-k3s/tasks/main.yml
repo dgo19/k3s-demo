@@ -44,6 +44,12 @@
     state: absent
   when: tempdir.path is defined
 
+- name: create ~/bin
+  file:
+    path: ~/bin
+    state: directory
+    mode: 0755
+
 - name: create ~/.kube
   file:
     path: ~/.kube

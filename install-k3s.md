@@ -1,6 +1,6 @@
 ## Install required packages (example for ubuntu and debian)
 ```
-$ sudo apt -y install git sudo curl apache2-utils
+$ sudo apt -y install git sudo curl apache2-utils ansible
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
