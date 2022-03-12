@@ -6,3 +6,4 @@
     - setup-sealed-secrets
     - setup-monitoring
     - setup-ingress-nginx
+    - setup-argocd
