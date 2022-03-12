@@ -1,0 +1,14 @@
+---
+- name: copy ingress cert
+  become: yes
+  copy:
+    src: "{{ playbook_dir }}/../applications/ingress-nginx/tls.crt"
+    dest: /usr/local/share/ca-certificates/k3sdemo.lan.crt
+    remote_src: yes
+    mode: 0644
+  register: copy_cert
+
+- name: update ca certificates
+  become: yes
+  shell: "update-ca-certificates"
+  when: copy_cert.changed == true

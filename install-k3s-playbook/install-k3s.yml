@@ -11,3 +11,4 @@
     - get-kubeseal
     - get-argocd
     - hosts
+    - cert
