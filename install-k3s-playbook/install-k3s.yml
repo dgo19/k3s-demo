@@ -9,3 +9,4 @@
     - get-kustomize
     - get-helm
     - get-kubeseal
+    - get-argocd

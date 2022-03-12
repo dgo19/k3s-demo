@@ -1,0 +1,26 @@
+---
+- name: check argocd install status
+  ansible.builtin.stat:
+    path: ~/bin/argocd
+  register: argocd_bin
+
+- name: check argocd version
+  shell: "~/bin/argocd version"
+  register: argocd_bin_v
+  changed_when: 0
+  when: argocd_bin.stat.exists == true
+
+- name: register argocd version
+  set_fact:
+    argocd_bin_version: "{{ argocd_bin_v.stdout | regex_search('argocd: (v[0-9.]+)[+]','\\1') | first }}"
+  when: argocd_bin.stat.exists == true and argocd_bin_v | length > 0
+
+- debug:
+    var: argocd_bin_version
+
+- name: download argocd
+  get_url:
+    url: "https://github.com/argoproj/argo-cd/releases/download/{{ argocd_version }}/argocd-linux-amd64"
+    dest: "~/bin/argocd"
+    mode: "0755"
+  when: (argocd_bin.stat.exists == false) or ((argocd_bin.stat.exists == true) and (argocd_bin_version != argocd_version))

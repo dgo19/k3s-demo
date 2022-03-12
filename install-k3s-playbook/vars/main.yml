@@ -3,3 +3,4 @@ k3s_version: v1.22.6+k3s1
 kubeseal_version: v0.17.3
 kustomize_version: v4.5.2
 helm_version: v3.8.0
+argocd_version: v2.3.1
