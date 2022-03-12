@@ -4,3 +4,4 @@
     - vars/main.yml
   roles:
     - setup-sealed-secrets
+    - setup-monitoring
