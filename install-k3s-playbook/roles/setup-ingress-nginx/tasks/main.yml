@@ -1,0 +1,20 @@
+---
+- name: check for ingress-nginx namespace
+  shell: "kubectl get namespace ingress-nginx"
+  changed_when: 0
+  register: namespace_ingress_nginx
+  failed_when: "namespace_ingress_nginx.rc not in [ 0, 1 ]"
+
+- name: check for ingress-nginx daemonset
+  shell: "kubectl -n ingress-nginx get daemonset ingress-nginx-controller"
+  changed_when: 0
+  register: daemonset_ingress_nginx
+  failed_when: "daemonset_ingress_nginx.rc not in [ 0, 1 ]"
+
+- name: update helm chart dependencies ingress-nginx
+  shell: "~/bin/helm dependency update {{ playbook_dir }}/../applications/ingress-nginx"
+  when: (namespace_ingress_nginx.rc == 1) or (daemonset_ingress_nginx.rc == 1)
+
+- name: deploy ingress-nginx
+  shell: "~/bin/helm template ingress-nginx {{ playbook_dir }}/../applications/ingress-nginx -n ingress-nginx --create-namespace | kubectl apply -f -"
+  when: (namespace_ingress_nginx.rc == 1) or (daemonset_ingress_nginx.rc == 1)
