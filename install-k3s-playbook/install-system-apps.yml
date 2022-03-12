@@ -7,3 +7,5 @@
     - setup-monitoring
     - setup-ingress-nginx
     - setup-argocd
+  environment:
+    KUBECONFIG: "{{ ansible_env.HOME }}/.kube/config"
