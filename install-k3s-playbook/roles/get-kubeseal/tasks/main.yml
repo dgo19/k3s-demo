@@ -12,7 +12,7 @@
 
 - name: register kubeseal version
   set_fact:
-    kubeseal_bin_version: "{{ kubeseal_bin_v.stdout | regex_search('version: ([0-9.]+)','\\1') | first }}"
+    kubeseal_bin_version: "{{ kubeseal_bin_v.stdout | regex_search('version: v*([0-9.]+)','\\1') | first }}"
   when: kubeseal_bin.stat.exists == true and kubeseal_bin_v | length > 0
 
 - debug:
