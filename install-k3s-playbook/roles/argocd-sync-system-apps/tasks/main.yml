@@ -1,0 +1,17 @@
+---
+- name: login to argocd
+  shell: "~/bin/argocd login --username admin --password admin argocd.k3sdemo.lan"
+
+- name: sync system apps
+  include_tasks: sync-app.yml
+  loop:
+    - argocd
+    - applications
+    - monitoring
+    - loki
+    - sealed-secrets
+    - kubernetes-dashboard
+    - kubernetes-dashboard
+    - ingress-nginx
+  loop_control:
+    loop_var: argocd_app

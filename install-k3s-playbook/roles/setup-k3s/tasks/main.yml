@@ -1,0 +1,96 @@
+---
+- name: check k3s install status
+  ansible.builtin.stat:
+    path: /usr/local/bin/k3s
+  register: k3s_bin
+
+- name: check k3s version
+  shell: "/usr/local/bin/k3s -v"
+  register: k3s_bin_v
+  changed_when: 0
+  when: k3s_bin.stat.exists == true
+
+- name: register k3s version
+  set_fact:
+    k3s_bin_version: "{{ k3s_bin_v.stdout | regex_search('k3s version (.+) ','\\1') | first }}"
+  when: k3s_bin.stat.exists and k3s_bin_v | length > 0
+
+- name: create tempdir for download
+  tempfile:
+    state: directory
+    suffix: k3s-install
+  register: tempdir
+  when: (k3s_bin.stat.exists == false) or ((k3s_bin.stat.exists == true) and (k3s_bin_version != k3s_version))
+
+- name: download k3s install script
+  get_url:
+    url: https://get.k3s.io
+    dest: "{{ tempdir.path }}/install.sh"
+    mode: "0750"
+  when: (k3s_bin.stat.exists == false) or ((k3s_bin.stat.exists == true) and (k3s_bin_version != k3s_version))
+
+- name: install k3s
+  command:
+    cmd: "{{ tempdir.path }}/install.sh"
+  environment:
+    INSTALL_K3S_VERSION: "{{ k3s_version }}"
+    INSTALL_K3S_EXEC: "server --disable traefik"
+  become: yes
+  when: k3s_bin.stat.exists == false
+
+- name: remove tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent
+  when: tempdir.path is defined
+
+- name: create ~/bin
+  file:
+    path: ~/bin
+    state: directory
+    mode: 0755
+
+- name: create ~/.kube
+  file:
+    path: ~/.kube
+    state: directory
+    mode: 0700
+
+- name: set kubeconfig permissions to read
+  file:
+    path: /etc/rancher/k3s/k3s.yaml
+    mode: "0644"
+  become: yes
+
+- name: copy kubeconfig
+  copy:
+    src: /etc/rancher/k3s/k3s.yaml
+    dest: ~/.kube/config
+    mode: 0600
+
+- name: revoke kubeconfig permissions
+  file:
+    path: /etc/rancher/k3s/k3s.yaml
+    mode: "0600"
+  become: yes
+
+- name: set alias for kubectl
+  lineinfile:
+    path: ~/.bashrc
+    regexp: '^alias kubectl='
+    line: 'alias kubectl="k3s kubectl"'
+    insertafter: EOF
+
+- name: set KUBECONFIG
+  lineinfile:
+    path: ~/.bashrc
+    regexp: '^export KUBECONFIG='
+    line: 'export KUBECONFIG=~/.kube/config'
+    insertafter: EOF
+
+- name: set kubectl bash completion
+  lineinfile:
+    path: ~/.bashrc
+    regexp: 'source .* kubectl completion'
+    line: 'source <(k3s kubectl completion bash)'
+    insertafter: EOF

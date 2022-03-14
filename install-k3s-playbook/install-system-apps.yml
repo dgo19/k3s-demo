@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  vars_files:
+    - vars/main.yml
+  roles:
+    - setup-sealed-secrets
+    - setup-monitoring
+    - setup-ingress-nginx
+    - setup-argocd
+  environment:
+    KUBECONFIG: "{{ ansible_env.HOME }}/.kube/config"

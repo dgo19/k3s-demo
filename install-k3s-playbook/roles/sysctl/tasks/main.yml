@@ -1,0 +1,10 @@
+---
+- name: set sysctl fs.inotify.max_user_instances to 8192
+  become: yes
+  sysctl:
+    name: fs.inotify.max_user_instances
+    value: '8192'
+    sysctl_set: yes
+    sysctl_file: /etc/sysctl.d/98-fs-inotify-max_user_instances.conf
+    state: present
+    reload: yes

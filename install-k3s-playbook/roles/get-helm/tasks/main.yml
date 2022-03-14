@@ -1,0 +1,54 @@
+---
+- name: check helm install status
+  ansible.builtin.stat:
+    path: ~/bin/helm
+  register: helm_bin
+
+- name: check helm version
+  shell: "~/bin/helm version"
+  register: helm_bin_v
+  changed_when: 0
+  when: helm_bin.stat.exists == true
+
+- name: register helm version
+  set_fact:
+    helm_bin_version: "{{ helm_bin_v.stdout | regex_search('Version:\"(v[0-9.]+)\",','\\1') | first }}"
+  when: helm_bin.stat.exists == true and helm_bin_v | length > 0
+
+- debug:
+    var: helm_bin_version
+
+- name: create tempdir for download
+  tempfile:
+    state: directory
+    suffix: helm
+  register: tempdir
+  when: (helm_bin.stat.exists == false) or ((helm_bin.stat.exists == true) and (helm_bin_version != helm_version))
+
+- name: download helm archive
+  get_url:
+    url: "https://get.helm.sh/helm-{{ helm_version }}-linux-amd64.tar.gz"
+    dest: "{{ tempdir.path }}/helm.tar.gz"
+    mode: "0750"
+  when: (helm_bin.stat.exists == false) or ((helm_bin.stat.exists == true) and (helm_bin_version != helm_version))
+
+- name: unarchive helm download
+  unarchive:
+    src: "{{ tempdir.path }}/helm.tar.gz"
+    dest: "{{ tempdir.path }}"
+    remote_src: yes
+  when: (helm_bin.stat.exists == false) or ((helm_bin.stat.exists == true) and (helm_bin_version != helm_version))
+
+- name: copy helm to ~/bin
+  copy:
+    src: "{{ tempdir.path }}/linux-amd64/helm"
+    dest: "~/bin/helm"
+    mode: "0755"
+    remote_src: yes
+  when: (helm_bin.stat.exists == false) or ((helm_bin.stat.exists == true) and (helm_bin_version != helm_version))
+
+- name: remove tempdir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent
+  when: tempdir.path is defined

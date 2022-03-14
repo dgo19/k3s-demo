@@ -1,0 +1,16 @@
+---
+- name: check for monitoring namespace
+  shell: "kubectl get namespace monitoring"
+  changed_when: 0
+  register: namespace_monitoring
+  failed_when: "namespace_monitoring.rc not in [ 0, 1 ]"
+
+- name: check for monitoring prometheuses crd
+  shell: "kubectl get crd prometheuses.monitoring.coreos.com"
+  changed_when: 0
+  register: crd_monitoring
+  failed_when: "crd_monitoring.rc not in [ 0, 1 ]"
+
+- name: deploy monitoring
+  shell: "~/bin/helm install --dependency-update monitoring {{ playbook_dir }}/../applications/monitoring -n monitoring --create-namespace"
+  when: (namespace_monitoring.rc == 1) or (crd_monitoring.rc == 1)

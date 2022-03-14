@@ -1,0 +1,9 @@
+---
+- name: "refresh argocd app {{ argocd_app }}"
+  shell: "~/bin/argocd app get {{ argocd_app }} --hard-refresh"
+
+- name: "sync argocd app {{ argocd_app }}"
+  shell: "~/bin/argocd app sync {{ argocd_app }} --prune"
+
+- name: "wait for sync to complete {{ argocd_app }}"
+  shell: "~/bin/argocd app wait {{ argocd_app }} --operation"

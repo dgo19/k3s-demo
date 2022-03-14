@@ -1,0 +1,7 @@
+---
+- name: put ingress subdomains in /etc/hosts
+  become: yes
+  lineinfile:
+    path: /etc/hosts
+    regexp: "^127\\.0\\.0\\.1"
+    line: "127.0.0.1 localhost {{ hosts_line }}"

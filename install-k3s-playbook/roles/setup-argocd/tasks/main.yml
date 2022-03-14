@@ -1,0 +1,50 @@
+---
+- name: check for argocd namespace
+  shell: "kubectl get namespace argocd"
+  changed_when: 0
+  register: namespace_argocd
+  failed_when: "namespace_argocd.rc not in [ 0, 1 ]"
+
+- name: check for argocd server deployment
+  shell: "kubectl -n argocd get deployment argocd-server"
+  changed_when: 0
+  register: deployment_argocd
+  failed_when: "deployment_argocd.rc not in [ 0, 1 ]"
+
+- name: deploy argocd
+  shell: "kubectl apply -k {{ playbook_dir }}/../argocd"
+  when: (namespace_argocd.rc == 1) or (deployment_argocd.rc == 1)
+
+- name: check for argocd application
+  shell: "kubectl -n argocd get app argocd"
+  changed_when: 0
+  register: app_argocd
+  failed_when: "app_argocd.rc not in [ 0, 1 ]"
+
+- name: deploy argocd application
+  shell: "kubectl apply -f {{ playbook_dir }}/../argocd/application-argocd.yaml"
+  when: (app_argocd.rc == 1)
+
+- name: check for argocd app of apps
+  shell: "kubectl -n argocd get app applications"
+  changed_when: 0
+  register: app_argocd_app
+  failed_when: "app_argocd_app.rc not in [ 0, 1 ]"
+
+- name: deploy argocd app of apps
+  shell: "kubectl apply -f {{ playbook_dir }}/../applications/applications.yaml"
+  when: (app_argocd_app.rc == 1)
+
+- name: wait for argocd to become ready
+  shell: "kubectl -n argocd wait --for=condition=ready pod -l app.kubernetes.io/name={{ item }}"
+  changed_when: 0
+  register: wait_argocd
+  until: wait_argocd.rc == 0
+  delay: 10
+  retries: 30
+  loop:
+    - argocd-redis
+    - argocd-dex-server
+    - argocd-repo-server
+    - argocd-application-controller
+    - argocd-server

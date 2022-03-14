@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  vars_files:
+    - vars/main.yml
+  roles:
+    - argocd-sync-system-apps

@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  vars_files:
+    - vars/main.yml
+  roles:
+    - install-pkgs
+    - sysctl
+    - setup-k3s
+    - get-kustomize
+    - get-helm
+    - get-kubeseal
+    - get-argocd
+    - hosts
+    - cert
