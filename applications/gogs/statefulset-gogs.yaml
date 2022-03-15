@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: gogs
+  name: gogs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gogs
+  serviceName: gogs
+  template:
+    metadata:
+      labels:
+        app: gogs
+    spec:
+      containers:
+      - image: gogs/gogs
+        imagePullPolicy: Always
+        name: gogs
+        ports:
+          - name: gogs-http
+            containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /
+            port: gogs-http
+          initialDelaySeconds: 15
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/bash", "-c", "/gogs-setup/gogs-setup.sh"]
+        volumeMounts:
+          - name: gogs-storage
+            mountPath: /data/gogs
+          - name: gogs-setup
+            mountPath: /gogs-setup
+          - name: gogs-conf
+            mountPath: /data/gogs/conf/
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: gogs-conf
+          configMap:
+            name: gogs-conf
+        - name: gogs-setup
+          secret:
+            secretName: gogs-setup
+            defaultMode: 0700
+  volumeClaimTemplates:
+  - metadata:
+      name: gogs-storage
+    spec:
+      storageClassName: local-path
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 2Gi

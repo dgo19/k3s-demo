@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: gogs
+  name: gogs
+spec:
+  ports:
+  - name: gogs-http
+    port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: gogs
+  sessionAffinity: None
+  type: ClusterIP
