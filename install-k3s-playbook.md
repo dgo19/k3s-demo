@@ -19,7 +19,7 @@ run ansible-playbook
 $ cd ~/k3s-demo/install-k3s-playbook
 $ ansible-playbook -K -D site.yml
 ```
-login to [ArgoCD](https://argocd.k3sdemo.lan/), [Kubernetes Dashboard](https://dashboard.k3sdmeo.lan), view [Grafana Dashboards](https://grafana.k3sdemo.lan) or explore kubernetes by shell and kubectl.
+login to [ArgoCD](https://argocd.k3sdemo.lan/), [Kubernetes Dashboard](https://dashboard.k3sdemo.lan), view [Grafana Dashboards](https://grafana.k3sdemo.lan) or explore kubernetes by shell and kubectl.
 
 make sure to reload your shell environment.
 ```
