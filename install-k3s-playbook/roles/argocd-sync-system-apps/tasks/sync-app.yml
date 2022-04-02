@@ -1,9 +1,21 @@
 ---
 - name: "refresh argocd app {{ argocd_app }}"
   shell: "~/bin/argocd app get {{ argocd_app }} --hard-refresh"
+  register: argocd_app_get
+
+- name: "register status of argocd app {{ argocd_app }}"
+  set_fact:
+    argocd_app_status: "{{ argocd_app_get.stdout | regex_search('Sync Status: +([a-zA-Z]+) ','\\1') | first }}"
+  when: argocd_app_get.stdout | length > 0
+
+- name: "status of argocd app {{ argocd_app }}"
+  debug:
+    var: argocd_app_status
 
 - name: "sync argocd app {{ argocd_app }}"
   shell: "~/bin/argocd app sync {{ argocd_app }} --prune"
+  when: argocd_app_status != "Synced"
 
 - name: "wait for sync to complete {{ argocd_app }}"
   shell: "~/bin/argocd app wait {{ argocd_app }} --operation"
+  when: argocd_app_status != "Synced"
