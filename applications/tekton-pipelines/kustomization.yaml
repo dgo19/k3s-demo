@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: tekton-pipelines
 
 bases:
-  - https://storage.googleapis.com/tekton-releases/pipeline/previous/v0.32.1/release.yaml
+  - https://storage.googleapis.com/tekton-releases/pipeline/previous/v0.34.1/release.yaml
 
 configMapGenerator:
   - name: config-registry-cert
