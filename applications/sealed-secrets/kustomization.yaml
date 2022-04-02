@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: sealed-secrets
 
 bases:
-  - https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.17.3/controller.yaml
+  - https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.17.4/controller.yaml
 
 patchesStrategicMerge:
   - deployment-sealed-secrets-controller.yaml
