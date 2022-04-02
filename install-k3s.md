@@ -90,7 +90,7 @@ Get kustomize
 ```
 $ mkdir ~/bin
 $ source ~/.profile
-$ curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.5.2/kustomize_v4.5.2_linux_amd64.tar.gz | tar xvzC ~/bin -f -
+$ curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.5.2/kustomize_v4.5.4_linux_amd64.tar.gz | tar xvzC ~/bin -f -
  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   674  100   674    0     0   2717      0 --:--:-- --:--:-- --:--:--  2717
