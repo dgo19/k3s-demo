@@ -1,5 +1,5 @@
 *.swp
 *.swo
 *~
-applications/monitoring/Chart.lock
-applications/monitoring/charts/
+Chart.lock
+charts/
