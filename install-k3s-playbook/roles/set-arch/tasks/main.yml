@@ -1,0 +1,14 @@
+---
+- name: set fact for amd64
+  set_fact:
+    download_arch: "amd64"
+  when: ansible_architecture == "x86_64"
+
+- name: set fact for arm64
+  set_fact:
+    download_arch: "arm64"
+  when: ansible_architecture == "aarch64"
+
+- name: show download_arch
+  debug:
+    var: download_arch
