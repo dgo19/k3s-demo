@@ -56,8 +56,8 @@ There are some container images missing for arm64, so not all applications are w
 | keycloak                  | :heavy_check_mark: | :no_entry:         | |
 | kubernetes-dashboard      | :heavy_check_mark: | :heavy_check_mark: | |
 | loki                      | :heavy_check_mark: | :heavy_check_mark: | |
-| mariadb-ephemeral         | :heavy_check_mark: | :heavy_check_mark: | phpmyadmin image not available, mariadb works |
-| mariadb-pv                | :heavy_check_mark: | :heavy_check_mark: | phpmyadmin image not available, mariadb works |
+| mariadb-ephemeral         | :heavy_check_mark: | :heavy_check_mark: :no_entry: | phpmyadmin image not available, mariadb works |
+| mariadb-pv                | :heavy_check_mark: | :heavy_check_mark: :no_entry: | phpmyadmin image not available, mariadb works |
 | monitoring                | :heavy_check_mark: | :heavy_check_mark: | |
 | postgres-operator         | :heavy_check_mark: | :no_entry:         | |
 | registry                  | :heavy_check_mark: | :heavy_check_mark: | |
