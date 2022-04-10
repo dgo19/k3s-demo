@@ -18,6 +18,11 @@
 - debug:
     var: kubeseal_bin_version
 
+- name: import role set-arch
+  import_role:
+    name: set-arch
+  when: (kubeseal_bin.stat.exists == false) or ((kubeseal_bin.stat.exists == true) and (kubeseal_bin_version != kubeseal_version))
+
 - name: create tempdir for download
   tempfile:
     state: directory
@@ -27,7 +32,7 @@
 
 - name: download kubeseal archive
   get_url:
-    url: "https://github.com/bitnami-labs/sealed-secrets/releases/download/v{{ kubeseal_version }}/kubeseal-{{ kubeseal_version }}-linux-amd64.tar.gz"
+    url: "https://github.com/bitnami-labs/sealed-secrets/releases/download/v{{ kubeseal_version }}/kubeseal-{{ kubeseal_version }}-linux-{{ download_arch }}.tar.gz"
     dest: "{{ tempdir.path }}/kubeseal.tar.gz"
     mode: "0750"
   when: (kubeseal_bin.stat.exists == false) or ((kubeseal_bin.stat.exists == true) and (kubeseal_bin_version != kubeseal_version))

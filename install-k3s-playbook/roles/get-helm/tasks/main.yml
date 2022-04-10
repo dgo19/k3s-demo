@@ -18,6 +18,11 @@
 - debug:
     var: helm_bin_version
 
+- name: import role set-arch
+  import_role:
+    name: set-arch
+  when: (helm_bin.stat.exists == false) or ((helm_bin.stat.exists == true) and (helm_bin_version != helm_version))
+
 - name: create tempdir for download
   tempfile:
     state: directory
@@ -27,7 +32,7 @@
 
 - name: download helm archive
   get_url:
-    url: "https://get.helm.sh/helm-{{ helm_version }}-linux-amd64.tar.gz"
+    url: "https://get.helm.sh/helm-{{ helm_version }}-linux-{{ download_arch }}.tar.gz"
     dest: "{{ tempdir.path }}/helm.tar.gz"
     mode: "0750"
   when: (helm_bin.stat.exists == false) or ((helm_bin.stat.exists == true) and (helm_bin_version != helm_version))
@@ -41,7 +46,7 @@
 
 - name: copy helm to ~/bin
   copy:
-    src: "{{ tempdir.path }}/linux-amd64/helm"
+    src: "{{ tempdir.path }}/linux-{{ download_arch }}/helm"
     dest: "~/bin/helm"
     mode: "0755"
     remote_src: yes

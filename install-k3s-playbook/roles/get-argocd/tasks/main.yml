@@ -19,9 +19,14 @@
 - debug:
     var: argocd_bin_version
 
+- name: import role set-arch
+  import_role:
+    name: set-arch
+  when: (argocd_bin.stat.exists == false) or ((argocd_bin.stat.exists == true) and (argocd_bin_version != argocd_version))
+
 - name: download argocd
   get_url:
-    url: "https://github.com/argoproj/argo-cd/releases/download/{{ argocd_version }}/argocd-linux-amd64"
+    url: "https://github.com/argoproj/argo-cd/releases/download/{{ argocd_version }}/argocd-linux-{{ download_arch }}"
     dest: "~/bin/argocd"
     mode: "0755"
     force: yes
