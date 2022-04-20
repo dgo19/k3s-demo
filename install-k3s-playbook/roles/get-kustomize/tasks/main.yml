@@ -18,6 +18,11 @@
 - debug:
     var: kustomize_bin_version
 
+- name: import role set-arch
+  import_role:
+    name: set-arch
+  when: (kustomize_bin.stat.exists == false) or ((kustomize_bin.stat.exists == true) and (kustomize_bin_version != kustomize_version))
+
 - name: create tempdir for download
   tempfile:
     state: directory
@@ -27,7 +32,7 @@
 
 - name: download kustomize archive
   get_url:
-    url: "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F{{ kustomize_version }}/kustomize_{{ kustomize_version }}_linux_amd64.tar.gz"
+    url: "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F{{ kustomize_version }}/kustomize_{{ kustomize_version }}_linux_{{ download_arch }}.tar.gz"
     dest: "{{ tempdir.path }}/kustomize.tar.gz"
     mode: "0750"
   when: (kustomize_bin.stat.exists == false) or ((kustomize_bin.stat.exists == true) and (kustomize_bin_version != kustomize_version))

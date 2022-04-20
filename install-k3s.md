@@ -87,6 +87,7 @@ $ echo 'source <(k3s kubectl completion bash)' >> ~/.bashrc
 $ source ~/.bashrc
 ```
 Get kustomize
+If you are on arm64 architecture, replace the amd64 by arm64 in the url.
 ```
 $ mkdir ~/bin
 $ source ~/.profile
@@ -98,6 +99,7 @@ $ curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomi
 100 4525k  100 4525k    0     0  4467k      0  0:00:01  0:00:01 --:--:-- 10.3M
 ```
 Get Helm
+If you are on arm64 architecture, replace the amd64 by arm64 in the url.
 ```
 $ curl -L https://get.helm.sh/helm-v3.8.1-linux-amd64.tar.gz | tar xvzC ~/bin --strip-components 1 -f - linux-amd64/helm
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -106,6 +108,7 @@ $ curl -L https://get.helm.sh/helm-v3.8.1-linux-amd64.tar.gz | tar xvzC ~/bin --
 100 12.9M  100 12.9M    0     0  9923k      0  0:00:01  0:00:01 --:--:-- 9930k
 ```
 Get kubeseal
+If you are on arm64 architecture, replace the amd64 by arm64 in the url.
 ```
 $ curl -L https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.17.5/kubeseal-0.17.5-linux-amd64.tar.gz | tar xvzC ~/bin -f - kubeseal
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
