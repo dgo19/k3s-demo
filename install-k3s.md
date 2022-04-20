@@ -107,7 +107,7 @@ $ curl -L https://get.helm.sh/helm-v3.8.1-linux-amd64.tar.gz | tar xvzC ~/bin --
 ```
 Get kubeseal
 ```
-$ curl -L https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.17.4/kubeseal-0.17.4-linux-amd64.tar.gz | tar xvzC ~/bin -f - kubeseal
+$ curl -L https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.17.5/kubeseal-0.17.5-linux-amd64.tar.gz | tar xvzC ~/bin -f - kubeseal
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   671  100   671    0     0   9450      0 --:--:-- --:--:-- --:--:--  9319
