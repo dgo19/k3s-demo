@@ -21,6 +21,12 @@ resources:
   - namespace-argocd.yaml
   - sealedsecret-argocd-secret.yaml
   - sealedsecret-repo-dgo19-k3s-demo.yaml
+  - secret-repo-helm-aquasecurity.yaml
+  - secret-repo-helm-grafana.yaml
+  - secret-repo-helm-istio-release.yaml
+  - secret-repo-helm-kiali.yaml
+  - secret-repo-helm-ingress-nginx.yaml
+  - secret-repo-helm-prometheus-community.yaml
   - servicemonitor-argocd-metrics.yaml
   - servicemonitor-argocd-server-metrics.yaml
   - servicemonitor-argocd-repo-server-metrics.yaml
