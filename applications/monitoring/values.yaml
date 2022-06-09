@@ -149,6 +149,8 @@ kube-prometheus-stack:
             regex: '.*-envoy-prom'
       serviceMonitorSelector: {}
       serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelector: {}
+      podMonitorSelectorNilUsesHelmValues: false
   prometheusOperator:
     admissionWebhooks:
       failurePolicy: "Ignore"
