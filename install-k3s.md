@@ -335,8 +335,8 @@ monitoring-grafana-59b4bd7697-hps5p                      3/3     Running   0    
 ## Installation of ingress nginx
 Trust Ingress Certificate (ubuntu and debian)
 ```
-$ cd ~/k3s-demo/applications/ingress-nginx
-$ sudo cp tls.crt /usr/local/share/ca-certificates/k3sdemo.lan.crt
+$ cd ~/k3s-demo/ca
+$ sudo cp ca.crt /usr/local/share/ca-certificates/k3sdemo.lan.crt
 $ sudo update-ca-certificates
 Updating certificates in /etc/ssl/certs...
 1 added, 0 removed; done.
@@ -345,8 +345,8 @@ done.
 ```
 Trust Ingress Certificate (fedora)
 ```
-$ cd ~/k3s-demo/applications/ingress-nginx
-$ sudo cp tls.crt /etc/pki/ca-trust/source/anchors/k3sdemo.lan.crt
+$ cd ~/k3s-demo/ca
+$ sudo cp ca.crt /etc/pki/ca-trust/source/anchors/k3sdemo.lan.crt
 $ sudo update-ca-trust
 ```
 Install ingress nginx
