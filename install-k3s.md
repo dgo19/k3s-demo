@@ -55,6 +55,115 @@ Setting up apache2-utils (2.4.48-3.1ubuntu3.2) ...
 Processing triggers for man-db (2.9.4-2) ...
 Processing triggers for libc-bin (2.34-0ubuntu3) ...
 ```
+## Install required packages (example for fedora)
+```
+$ sudo yum -y install git sudo curl perl-Apache-Htpasswd ansible
+Last metadata expiration check: 0:01:49 ago on Sat 11 Jun 2022 01:23:45 PM CEST.
+Package git-2.35.1-1.fc36.x86_64 is already installed.
+Package sudo-1.9.8-5.p2.fc36.x86_64 is already installed.
+Package curl-7.82.0-2.fc36.x86_64 is already installed.
+Dependencies resolved.
+==============================================================================================================================================================================
+ Package                                           Architecture                       Version                                       Repository                           Size
+==============================================================================================================================================================================
+Installing:
+ ansible                                           noarch                             5.8.0-1.fc36                                  updates                              33 M
+ perl-Apache-Htpasswd                              noarch                             1.9-26.fc36                                   fedora                               19 k
+Installing dependencies:
+ ansible-core                                      noarch                             2.12.6-1.fc36                                 updates                             2.4 M
+ libsodium                                         x86_64                             1.0.18-9.fc36                                 fedora                              163 k
+ python3-bcrypt                                    x86_64                             3.2.2-1.fc36                                  updates                              43 k
+ python3-jinja2                                    noarch                             3.0.3-2.fc36                                  fedora                              530 k
+ python3-jmespath                                  noarch                             1.0.0-2.fc36                                  updates                              44 k
+ python3-ntlm-auth                                 noarch                             1.5.0-4.fc35                                  fedora                               53 k
+ python3-pynacl                                    x86_64                             1.4.0-5.fc36                                  fedora                              108 k
+ python3-pyyaml                                    x86_64                             6.0-3.fc36                                    fedora                              192 k
+ python3-requests_ntlm                             noarch                             1.1.0-16.fc35                                 fedora                               18 k
+ python3-resolvelib                                noarch                             0.5.5-4.fc36                                  fedora                               31 k
+ python3-xmltodict                                 noarch                             0.12.0-14.fc36                                fedora                               22 k
+Installing weak dependencies:
+ python3-paramiko                                  noarch                             2.11.0-1.fc36                                 updates                             303 k
+ python3-pyasn1                                    noarch                             0.4.8-8.fc36                                  fedora                              134 k
+ python3-winrm                                     noarch                             0.4.1-5.fc36                                  fedora                               80 k
+
+Transaction Summary
+==============================================================================================================================================================================
+Install  16 Packages
+
+Total download size: 37 M
+Installed size: 329 M
+Downloading Packages:
+(1/16): perl-Apache-Htpasswd-1.9-26.fc36.noarch.rpm                                                                                           144 kB/s |  19 kB     00:00    
+(2/16): python3-jinja2-3.0.3-2.fc36.noarch.rpm                                                                                                1.9 MB/s | 530 kB     00:00    
+(3/16): libsodium-1.0.18-9.fc36.x86_64.rpm                                                                                                    593 kB/s | 163 kB     00:00    
+(4/16): python3-pynacl-1.4.0-5.fc36.x86_64.rpm                                                                                                2.7 MB/s | 108 kB     00:00    
+(5/16): python3-ntlm-auth-1.5.0-4.fc35.noarch.rpm                                                                                             200 kB/s |  53 kB     00:00    
+(6/16): python3-pyasn1-0.4.8-8.fc36.noarch.rpm                                                                                                586 kB/s | 134 kB     00:00    
+(7/16): python3-pyyaml-6.0-3.fc36.x86_64.rpm                                                                                                  753 kB/s | 192 kB     00:00    
+(8/16): python3-requests_ntlm-1.1.0-16.fc35.noarch.rpm                                                                                         82 kB/s |  18 kB     00:00    
+(9/16): python3-resolvelib-0.5.5-4.fc36.noarch.rpm                                                                                            164 kB/s |  31 kB     00:00    
+(10/16): python3-xmltodict-0.12.0-14.fc36.noarch.rpm                                                                                           87 kB/s |  22 kB     00:00    
+(11/16): python3-winrm-0.4.1-5.fc36.noarch.rpm                                                                                                240 kB/s |  80 kB     00:00    
+(12/16): python3-bcrypt-3.2.2-1.fc36.x86_64.rpm                                                                                               501 kB/s |  43 kB     00:00    
+(13/16): python3-jmespath-1.0.0-2.fc36.noarch.rpm                                                                                             1.6 MB/s |  44 kB     00:00    
+(14/16): python3-paramiko-2.11.0-1.fc36.noarch.rpm                                                                                            868 kB/s | 303 kB     00:00    
+(15/16): ansible-core-2.12.6-1.fc36.noarch.rpm                                                                                                1.7 MB/s | 2.4 MB     00:01    
+(16/16): ansible-5.8.0-1.fc36.noarch.rpm                                                                                                      9.7 MB/s |  33 MB     00:03    
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                         5.2 MB/s |  37 MB     00:07     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                                                                      1/1 
+  Installing       : python3-jmespath-1.0.0-2.fc36.noarch                                                                                                                1/16 
+  Installing       : python3-bcrypt-3.2.2-1.fc36.x86_64                                                                                                                  2/16 
+  Installing       : python3-xmltodict-0.12.0-14.fc36.noarch                                                                                                             3/16 
+  Installing       : python3-resolvelib-0.5.5-4.fc36.noarch                                                                                                              4/16 
+  Installing       : python3-pyyaml-6.0-3.fc36.x86_64                                                                                                                    5/16 
+  Installing       : python3-pyasn1-0.4.8-8.fc36.noarch                                                                                                                  6/16 
+  Installing       : python3-ntlm-auth-1.5.0-4.fc35.noarch                                                                                                               7/16 
+  Installing       : python3-requests_ntlm-1.1.0-16.fc35.noarch                                                                                                          8/16 
+  Installing       : python3-winrm-0.4.1-5.fc36.noarch                                                                                                                   9/16 
+  Installing       : python3-jinja2-3.0.3-2.fc36.noarch                                                                                                                 10/16 
+  Installing       : libsodium-1.0.18-9.fc36.x86_64                                                                                                                     11/16 
+  Installing       : python3-pynacl-1.4.0-5.fc36.x86_64                                                                                                                 12/16 
+  Installing       : python3-paramiko-2.11.0-1.fc36.noarch                                                                                                              13/16 
+  Installing       : ansible-core-2.12.6-1.fc36.noarch                                                                                                                  14/16 
+  Installing       : ansible-5.8.0-1.fc36.noarch                                                                                                                        15/16 
+  Installing       : perl-Apache-Htpasswd-1.9-26.fc36.noarch                                                                                                            16/16 
+  Running scriptlet: perl-Apache-Htpasswd-1.9-26.fc36.noarch                                                                                                            16/16 
+  Verifying        : libsodium-1.0.18-9.fc36.x86_64                                                                                                                      1/16 
+  Verifying        : perl-Apache-Htpasswd-1.9-26.fc36.noarch                                                                                                             2/16 
+  Verifying        : python3-jinja2-3.0.3-2.fc36.noarch                                                                                                                  3/16 
+  Verifying        : python3-ntlm-auth-1.5.0-4.fc35.noarch                                                                                                               4/16 
+  Verifying        : python3-pyasn1-0.4.8-8.fc36.noarch                                                                                                                  5/16 
+  Verifying        : python3-pynacl-1.4.0-5.fc36.x86_64                                                                                                                  6/16 
+  Verifying        : python3-pyyaml-6.0-3.fc36.x86_64                                                                                                                    7/16 
+  Verifying        : python3-requests_ntlm-1.1.0-16.fc35.noarch                                                                                                          8/16 
+  Verifying        : python3-resolvelib-0.5.5-4.fc36.noarch                                                                                                              9/16 
+  Verifying        : python3-winrm-0.4.1-5.fc36.noarch                                                                                                                  10/16 
+  Verifying        : python3-xmltodict-0.12.0-14.fc36.noarch                                                                                                            11/16 
+  Verifying        : ansible-5.8.0-1.fc36.noarch                                                                                                                        12/16 
+  Verifying        : ansible-core-2.12.6-1.fc36.noarch                                                                                                                  13/16 
+  Verifying        : python3-bcrypt-3.2.2-1.fc36.x86_64                                                                                                                 14/16 
+  Verifying        : python3-jmespath-1.0.0-2.fc36.noarch                                                                                                               15/16 
+  Verifying        : python3-paramiko-2.11.0-1.fc36.noarch                                                                                                              16/16 
+
+Installed:
+  ansible-5.8.0-1.fc36.noarch                   ansible-core-2.12.6-1.fc36.noarch         libsodium-1.0.18-9.fc36.x86_64          perl-Apache-Htpasswd-1.9-26.fc36.noarch   
+  python3-bcrypt-3.2.2-1.fc36.x86_64            python3-jinja2-3.0.3-2.fc36.noarch        python3-jmespath-1.0.0-2.fc36.noarch    python3-ntlm-auth-1.5.0-4.fc35.noarch     
+  python3-paramiko-2.11.0-1.fc36.noarch         python3-pyasn1-0.4.8-8.fc36.noarch        python3-pynacl-1.4.0-5.fc36.x86_64      python3-pyyaml-6.0-3.fc36.x86_64          
+  python3-requests_ntlm-1.1.0-16.fc35.noarch    python3-resolvelib-0.5.5-4.fc36.noarch    python3-winrm-0.4.1-5.fc36.noarch       python3-xmltodict-0.12.0-14.fc36.noarch   
+
+Complete!
+```
+## Fedora prerequisites
+Disbale firewalld as described in k3s documentation.
+```
+$ systemctl disable firewalld --now
+```
 ## Installation of k3s
 We install a specific version of k3s. It has been tested for this demo. You can install the latest version by omitting the INSTALL_K3s_VERSION variable or choose a version.
 ```
@@ -87,11 +196,11 @@ $ echo 'source <(k3s kubectl completion bash)' >> ~/.bashrc
 $ source ~/.bashrc
 ```
 Get kustomize
-If you are on arm64 architecture, replace the amd64 by arm64 in the url.
+If you are on arm64 architecture, replace the amd64 by arm64 in the url. The source of .profile is only needed on debian/ubuntu.
 ```
 $ mkdir ~/bin
 $ source ~/.profile
-$ curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.5.2/kustomize_v4.5.4_linux_amd64.tar.gz | tar xvzC ~/bin -f -
+$ curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.5.4/kustomize_v4.5.4_linux_amd64.tar.gz | tar xvzC ~/bin -f -
  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   674  100   674    0     0   2717      0 --:--:-- --:--:-- --:--:--  2717
@@ -224,7 +333,7 @@ prometheus-monitoring-kube-prometheus-prometheus-0       2/2     Running   0    
 monitoring-grafana-59b4bd7697-hps5p                      3/3     Running   0          61s
 ```
 ## Installation of ingress nginx
-Trust Ingress Certificate
+Trust Ingress Certificate (ubuntu and debian)
 ```
 $ cd ~/k3s-demo/applications/ingress-nginx
 $ sudo cp tls.crt /usr/local/share/ca-certificates/k3sdemo.lan.crt
@@ -233,6 +342,12 @@ Updating certificates in /etc/ssl/certs...
 1 added, 0 removed; done.
 Running hooks in /etc/ca-certificates/update.d...
 done.
+```
+Trust Ingress Certificate (fedora)
+```
+$ cd ~/k3s-demo/applications/ingress-nginx
+$ sudo cp tls.crt /etc/pki/ca-trust/source/anchors/k3sdemo.lan.crt
+$ sudo update-ca-trust
 ```
 Install ingress nginx
 ```
