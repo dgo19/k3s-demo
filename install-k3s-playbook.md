@@ -1,7 +1,11 @@
 # ansible playbook (tested on ubuntu)
-install required packages
+install required packages (ubuntu/debian)
 ```
 $ sudo apt -y install git sudo curl ansible
+```
+install required packages (fedora)
+```
+$ sudo yum -y install git sudo curl perl-Apache-Htpasswd ansible
 ```
 clone git repository
 ```
