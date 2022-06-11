@@ -1,14 +1,30 @@
 ---
-- name: copy ingress cert
+- name: copy ingress cert (debian family)
   become: yes
   copy:
-    src: "{{ playbook_dir }}/../applications/ingress-nginx/tls.crt"
+    src: "{{ playbook_dir }}/../ca/ca.crt"
     dest: /usr/local/share/ca-certificates/k3sdemo.lan.crt
     remote_src: yes
     mode: 0644
   register: copy_cert
+  when: ansible_os_family == "Debian"
 
 - name: update ca certificates
   become: yes
   shell: "update-ca-certificates"
-  when: copy_cert.changed == true
+  when: (ansible_os_family == "Debian") and (copy_cert.changed == true)
+
+- name: copy ingress cert (redhat family)
+  become: yes
+  copy:
+    src: "{{ playbook_dir }}/../ca/ca.crt"
+    dest: /etc/pki/ca-trust/source/anchors/k3sdemo.lan.crt
+    remote_src: yes
+    mode: 0644
+  register: copy_cert
+  when: ansible_os_family == "RedHat"
+
+- name: update ca certificates
+  become: yes
+  shell: "update-ca-trust"
+  when: (ansible_os_family == "RedHat") and (copy_cert.changed == true)
