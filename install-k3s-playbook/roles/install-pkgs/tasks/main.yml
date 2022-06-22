@@ -1,5 +1,5 @@
 ---
-- name: install additional packages
+- name: install additional packages (debian family)
   become: yes
   become_user: root
   apt:
@@ -9,3 +9,15 @@
     - curl
     - apache2-utils
     - ansible
+  when: ansible_os_family == "Debian"
+- name: install additional packages (redhat family)
+  become: yes
+  become_user: root
+  yum:
+    name:
+    - git
+    - curl
+    - perl-Apache-Htpasswd
+    - ansible
+    state: present
+  when: ansible_os_family == "RedHat"

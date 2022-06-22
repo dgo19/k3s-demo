@@ -1,4 +1,11 @@
 ---
+- name: disable firewalld (redhat family)
+  ansible.builtin.systemd:
+    name: firewalld
+    state: stopped
+    enabled: no
+  when: ansible_os_family == "RedHat"
+
 - name: check k3s install status
   ansible.builtin.stat:
     path: /usr/local/bin/k3s
