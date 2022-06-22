@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - application-configmaps.yaml
+  - application-echo.yaml
   - application-gogs.yaml
   - application-ingress-nginx.yaml
   - application-istio-bookinfo.yaml

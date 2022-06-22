@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: http-svc
+  name: http-svc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: http-svc
+  template:
+    metadata:
+      labels:
+        run: http-svc
+    spec:
+      containers:
+        - name: http-svc
+          image: gcr.io/kubernetes-e2e-test-images/echoserver:2.2
+          ports:
+          - containerPort: 8080
