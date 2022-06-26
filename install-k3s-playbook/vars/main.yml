@@ -1,5 +1,5 @@
 ---
-k3s_version: v1.22.7+k3s1
+k3s_version: v1.23.6+k3s1
 kubeseal_version: 0.17.5
 kustomize_version: v4.5.4
 helm_version: v3.8.1
