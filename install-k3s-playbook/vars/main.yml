@@ -3,5 +3,5 @@ k3s_version: v1.22.7+k3s1
 kubeseal_version: 0.17.5
 kustomize_version: v4.5.4
 helm_version: v3.8.1
-argocd_version: v2.3.3
+argocd_version: v2.4.2
 hosts_line: argocd.k3sdemo.lan alertmanager.k3sdemo.lan prometheus.k3sdemo.lan grafana.k3sdemo.lan kiali.k3sdemo.lan jaeger.k3sdemo.lan dashboard.k3sdemo.lan sealed-secrets.k3sdemo.lan registry.k3sdemo.lan keycloak.k3sdemo.lan configmap-web.k3sdemo.lan pma-mariadb-ephemeral.k3sdemo.lan my-webserver.k3sdemo.lan pma-mariadb-pv.k3sdemo.lan test-nginx.k3sdemo.lan git.k3sdemo.lan
