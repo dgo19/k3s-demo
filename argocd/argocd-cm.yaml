@@ -9,7 +9,7 @@ data:
         args: ["helm dependency build"]
       generate:
         command: [sh, -c]
-        args: ["helm template $OPTIONS --release-name $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE . > all.yaml && kustomize build"]
+        args: ["helm template $ARGOCD_ENV_OPTIONS --release-name $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE . > all.yaml && kustomize build"]
 kind: ConfigMap
 metadata:
   name: argocd-cm
