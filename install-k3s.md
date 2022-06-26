@@ -210,7 +210,7 @@ $ curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomi
 Get Helm
 If you are on arm64 architecture, replace the amd64 by arm64 in the url.
 ```
-$ curl -L https://get.helm.sh/helm-v3.8.1-linux-amd64.tar.gz | tar xvzC ~/bin --strip-components 1 -f - linux-amd64/helm
+$ curl -L https://get.helm.sh/helm-v3.9.0-linux-amd64.tar.gz | tar xvzC ~/bin --strip-components 1 -f - linux-amd64/helm
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0linux-amd64/helm
