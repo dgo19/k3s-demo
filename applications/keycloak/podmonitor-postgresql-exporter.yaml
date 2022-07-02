@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: postgresql-exporter
+spec:
+  selector:
+    matchLabels:
+      application: spilo
+  podMetricsEndpoints:
+  - port: pg-exporter
+    relabelings:
+    - sourceLabels: [__meta_kubernetes_namespace]
+      action: replace
+      targetLabel: kubernetes_namespace
+    - sourceLabels: [__meta_kubernetes_pod_label_cluster_name]
+      action: replace
+      targetLabel: release

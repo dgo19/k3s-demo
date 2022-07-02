@@ -16,3 +16,33 @@ spec:
     keycloak: keycloak  # dbname: owner
   postgresql:
     version: "11"
+  sidecars:
+  - name: exporter
+    image: prometheuscommunity/postgres-exporter
+    ports:
+    - name: pg-exporter
+      containerPort: 9187
+      protocol: TCP
+    resources:
+      requests:
+        cpu: 50m
+        memory: 200M
+    env:
+    - name: CLUSTER_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.labels['cluster-name']
+    - name: DATA_SOURCE_NAME
+      value: >-
+        host=/var/run/postgresql user=postgres
+        application_name=postgres_exporter
+    - name: PG_EXPORTER_CONSTANT_LABELS
+      value: 'release=$(CLUSTER_NAME),namespace=$(POD_NAMESPACE)'
+  additionalVolumes:
+    - name: socket-directory
+      mountPath: /var/run/postgresql
+      targetContainers:
+        - all
+      volumeSource:
+        emptyDir: {}
