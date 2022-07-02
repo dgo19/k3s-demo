@@ -89,6 +89,10 @@ kube-prometheus-stack:
           gnetId: 9614
           revision: 1
           datasource: default
+        PostgreSQL:
+          gnetId: 9628
+          revision: 7
+          datasource: default
     plugins:
       - grafana-piechart-panel
   kubeApiServer:
