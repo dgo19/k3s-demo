@@ -2,6 +2,7 @@
 {{ if regexMatch ".*\\/(Chart.yaml|kustomization.yaml)$" $path }}
 {{ $appdir := regexReplaceAll "(^.*)/.*\\.yaml$" $path "${1}" }}
 {{ $appname := regexReplaceAll "(?:(?:/?[a-z]*/)*/?([a-z]+?)/+)[a-zA-Z]+\\.yaml$" $path "${1}" }}
+# {{ if or (regexMatch ".*\\/(kustomization.yaml)$" $path ) (not (index $.Values.override $appname).plugin) }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -36,6 +37,7 @@ spec:
   {{- with (index $.Values.override $appname).ignoreDifferences }}
   ignoreDifferences: {{ . | toYaml | nindent 4 }}
   {{- end }}
+# {{ end }}
 {{ end }}
 {{ end }}
 
