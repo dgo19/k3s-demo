@@ -1,0 +1,101 @@
+repoURL: https://github.com/dgo19/k3s-demo.git
+server: https://kubernetes.default.svc
+targetRevision: HEAD
+override:
+  test-my-webserver:
+    namespace: test
+  ingress-nginx:
+    labels:
+      appgroup: system
+    syncPolicy:
+      syncOptions:
+        - CreateNamespace=true
+  kubernetes-dasboard:
+    labels:
+      appgroup: system
+  loki:
+    labels:
+      appgroup: system
+    syncPolicy:
+      syncOptions:
+        - CreateNamespace=true
+      ignoreDifferences:
+      - name: kubernetes-dashboard-csrf
+        kind: Secret
+        jsonPointers:
+          - /data/csrf
+      - name: kubernetes-dashboard-key-holder
+        kind: Secret
+        jsonPointers:
+          - /data/priv
+          - /data/pub
+  monitoring:
+    labels:
+      appgroup: system
+    syncPolicy:
+      syncOptions:
+        - CreateNamespace=true
+  sealed-secrets:
+    labels:
+      appgroup: system
+    syncPolicy:
+      syncOptions:
+        - CreateNamespace=true
+  istio-system:
+    labels:
+      appgroup: servicemesh
+    syncPolicy:
+      syncOptions:
+      - CreateNamespace=true
+    ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      kind: MutatingWebhookConfiguration
+      jsonPointers:
+      - /webhooks/0/clientConfig/caBundle
+    - group: admissionregistration.k8s.io
+      kind: MutatingWebhookConfiguration
+      jsonPointers:
+      - /webhooks/1/clientConfig/caBundle
+    - group: admissionregistration.k8s.io
+      kind: MutatingWebhookConfiguration
+      jsonPointers:
+      - /webhooks/2/clientConfig/caBundle
+    - group: admissionregistration.k8s.io
+      kind: MutatingWebhookConfiguration
+      jsonPointers:
+      - /webhooks/3/clientConfig/caBundle
+    - group: admissionregistration.k8s.io
+      kind: ValidatingWebhookConfiguration
+      jsonPointers:
+      - /webhooks/0/failurePolicy
+  istio-system-jaeger:
+    labels:
+      appgroup: servicemesh
+    syncPolicy:
+      syncOptions:
+        - CreateNamespace=true
+  istio-bookinfo:
+    labels:
+      appgroup: servicemesh
+  istio-bookinfo-bombardier:
+    labels:
+      appgroup: servicemesh
+    syncPolicy:
+      syncOptions:
+        - CreateNamespace=true
+  tekton-pipelines:
+    labels:
+      appgroup: cicd
+  registry:
+    labels:
+      appgroup: cicd
+  test-nginx:
+    labels:
+      appgroup: cicd
+  test-nginx-dev:
+    labels:
+      appgroup: cicd
+  starboard:
+    syncPolicy:
+      syncOptions:
+        - CreateNamespace=true
