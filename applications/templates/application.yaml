@@ -27,6 +27,9 @@ spec:
     {{- with (index $.Values.override $appname).helm }}
     helm: {{ . | toYaml | nindent 6 }}
     {{- end }}
+    {{- with (index $.Values.override $appname).plugin }}
+    plugin: {{ . | toYaml | nindent 6 }}
+    {{- end }}
   {{- with (index $.Values.override $appname).syncPolicy }}
   syncPolicy: {{ . | toYaml | nindent 4 }}
   {{- end }}
