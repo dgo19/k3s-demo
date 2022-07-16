@@ -1,6 +1,7 @@
 repoURL: https://github.com/dgo19/k3s-demo.git
 server: https://kubernetes.default.svc
 project: default
+appnamespace: argocd
 targetRevision: HEAD
 override:
   test-my-webserver:

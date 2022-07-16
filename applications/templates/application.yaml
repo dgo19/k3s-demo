@@ -8,7 +8,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: {{ $appname }}
-  namespace: argocd
+  namespace: {{ $.Values.appnamespace }}
   {{- with (index $.Values.override $appname).labels }}
   labels: {{ . | toYaml | nindent 4 }}
   {{- end }}
