@@ -20,7 +20,7 @@ spec:
     namespace: {{ $appname }}
     {{- end }}
     server: {{ $.Values.server }}
-  project: default
+  project: {{ $.Values.project }}
   source:
     path: applications/{{ $appdir }}
     repoURL: {{ $.Values.repoURL }}

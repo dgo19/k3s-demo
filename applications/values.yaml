@@ -1,5 +1,6 @@
 repoURL: https://github.com/dgo19/k3s-demo.git
 server: https://kubernetes.default.svc
+project: default
 targetRevision: HEAD
 override:
   test-my-webserver:
