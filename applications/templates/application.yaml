@@ -1,8 +1,8 @@
 {{ range $path, $_ :=  .Files.Glob  "**.yaml" }}
 {{ if regexMatch ".*\\/(Chart.yaml|kustomization.yaml)$" $path }}
 {{ $appdir := regexReplaceAll "(^.*)/.*\\.yaml$" $path "${1}" }}
-{{ $appname := regexReplaceAll "(?:(?:/?[a-z]*/)*/?([a-z]+?)/+)[a-zA-Z]+\\.yaml$" $path "${1}" }}
-{{ if or (regexMatch ".*\\/(kustomization.yaml)$" $path ) (not (index $.Values.override $appname).plugin) }}
+{{ $appname := regexReplaceAll "(?:(?:/?[a-zA-Z0-9]*/)*/?([a-zA-Z0-9]+?)/+)[a-zA-Z0-9]+\\.yaml$" $path "${1}" }}
+{{ if or (regexMatch ".*\\/(Chart.yaml)$" $path ) (not (index $.Values.override $appname).plugin) }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
