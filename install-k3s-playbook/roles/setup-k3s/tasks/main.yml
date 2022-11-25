@@ -41,7 +41,7 @@
     cmd: "{{ tempdir.path }}/install.sh"
   environment:
     INSTALL_K3S_VERSION: "{{ k3s_version }}"
-    INSTALL_K3S_EXEC: "server --disable traefik"
+    INSTALL_K3S_EXEC: "server --disable traefik --disable servicelb"
   become: yes
   when: (k3s_bin.stat.exists == false) or ((k3s_bin.stat.exists == true) and (k3s_bin_version != k3s_version))
 
