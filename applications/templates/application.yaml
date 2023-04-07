@@ -1,0 +1,43 @@
+{{ range $path, $_ :=  .Files.Glob  "**.yaml" }}
+{{ if regexMatch ".*\\/(Chart.yaml|kustomization.yaml)$" $path }}
+{{ $appdir := regexReplaceAll "(^.*)/.*\\.yaml$" $path "${1}" }}
+{{ $appname := regexReplaceAll "(?:(?:/?[a-zA-Z0-9]*/)*/?([a-zA-Z0-9]+?)/+)[a-zA-Z0-9]+\\.yaml$" $path "${1}" }}
+{{ if or (regexMatch ".*\\/(Chart.yaml)$" $path ) (not (index $.Values.override $appname).plugin) }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $appname }}
+  namespace: {{ $.Values.appnamespace }}
+  {{- with (index $.Values.override $appname).labels }}
+  labels: {{ . | toYaml | nindent 4 }}
+  {{- end }}
+spec:
+  destination:
+    {{- if (index $.Values.override $appname).namespace }}
+    namespace: {{ (index $.Values.override $appname).namespace }}
+    {{- else }}
+    namespace: {{ $appname }}
+    {{- end }}
+    server: {{ $.Values.server }}
+  project: {{ $.Values.project }}
+  source:
+    path: applications/{{ $appdir }}
+    repoURL: {{ $.Values.repoURL }}
+    targetRevision: {{ $.Values.targetRevision }}
+    {{- with (index $.Values.override $appname).helm }}
+    helm: {{ . | toYaml | nindent 6 }}
+    {{- end }}
+    {{- with (index $.Values.override $appname).plugin }}
+    plugin: {{ . | toYaml | nindent 6 }}
+    {{- end }}
+  {{- with (index $.Values.override $appname).syncPolicy }}
+  syncPolicy: {{ . | toYaml | nindent 4 }}
+  {{- end }}
+  {{- with (index $.Values.override $appname).ignoreDifferences }}
+  ignoreDifferences: {{ . | toYaml | nindent 4 }}
+  {{- end }}
+{{ end }}
+{{ end }}
+{{ end }}
+
