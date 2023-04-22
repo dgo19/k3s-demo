@@ -40,7 +40,7 @@ kiali-server:
       in_cluster_url: 'http://tracing.istio-system:16685/jaeger'
       use_grpc: true
       # Public facing URL of Jaeger
-      url: 'https://jaeger.k3sdemo.lan/'
+      url: 'https://jaeger.k3sdemo.lan/jaeger'
     grafana:
       enabled: true
       in_cluster_url: "http://monitoring-grafana.monitoring:80/"
