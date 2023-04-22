@@ -1,9 +1,12 @@
+global:
+  # Used to locate istiod.
+  istioNamespace: istio-system
 gateway:
   name: "istio-ingressgateway"
   replicaCount: 1
   service:
     # Type of service. Set to "None" to disable the service entirely
-    type: LoadBalancer
+    type: NodePort
     ports:
     - name: status-port
       port: 15021
@@ -22,10 +25,13 @@ gateway:
     loadBalancerSourceRanges: []
     externalTrafficPolicy: ""
 kiali-server:
+  auth:
+    strategy: anonymous
   deployment:
     ingress:
       enabled: false
       class_name: "nginx"
+    view_only_mode: false
   external_services:
     prometheus:
       url: "http://monitoring-kube-prometheus-prometheus.monitoring:9090/"
