@@ -87,7 +87,7 @@ ingress-argocd-server   <none>   argocd.k3sdemo.lan   192.168.0.133   80      11
 Download the commandline client
 If you are on arm64 architecture, replace the amd64 by arm64 in the url.
 ```
-$ curl -L -o ~/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v2.5.2/argocd-linux-amd64
+$ curl -L -o ~/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v2.6.7/argocd-linux-amd64
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   626  100   626    0     0   2454      0 --:--:-- --:--:-- --:--:--  2454
