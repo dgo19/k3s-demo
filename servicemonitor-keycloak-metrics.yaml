@@ -5,7 +5,9 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: keycloak-mgmt
+      app: keycloak
   endpoints:
-  - port: mgmt
+  - port: http
     path: /metrics
+  - port: http
+    path: /realms/master/metrics

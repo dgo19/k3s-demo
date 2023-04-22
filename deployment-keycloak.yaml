@@ -17,40 +17,55 @@ spec:
       initContainers:
       - name: init
         image: alpine
-        command: ['sh', '-c', 'wget -O /deployments/keycloak-metrics-spi.jar https://github.com/aerogear/keycloak-metrics-spi/releases/download/2.5.3/keycloak-metrics-spi-2.5.3.jar && touch /deployments/keycloak-metrics-spi.jar.dodeploy']
+        command: ['sh', '-c', 'wget -O /deployments/keycloak-metrics-spi.jar https://github.com/aerogear/keycloak-metrics-spi/releases/download/3.0.0/keycloak-metrics-spi-3.0.0.jar']
         volumeMounts:
           - mountPath: /deployments
             name: deployments
       containers:
       - name: keycloak
-        image: quay.io/keycloak/keycloak:16.1.1
+        image: quay.io/keycloak/keycloak:21.0.2-0
+        command:
+        - "/opt/keycloak/bin/kc.sh"
+        - "start-dev"
         env:
-        - name: KEYCLOAK_USER
+        #- name: KC_HOSTNAME
+        #  value: "keycloak.k3sdemo.lan"
+        - name: KC_METRICS_ENABLED
+          value: "true"
+        - name: KC_HEALTH_ENABLED
+          value: "true"
+        - name: KC_PROXY
+          value: "edge"
+        - name: KC_HOSTNAME_STRICT
+          value: "false"
+        - name: KC_HOSTNAME_STRICT_HTTPS
+          value: "false"
+        - name: KC_HOSTNAME_URL
+          value: "https://keycloak.k3sdemo.lan/"
+        - name: KC_DB
+          value: "postgres"
+        - name: KC_DB_URL
+          value: "jdbc:postgresql://acid-minimal-cluster:5432/keycloak"
+        - name: KEYCLOAK_ADMIN
           value: "admin"
-        - name: KEYCLOAK_PASSWORD
+        - name: KEYCLOAK_ADMIN_PASSWORD
           value: "admin"
         - name: KEYCLOAK_STATISTICS
           value: "all"
         - name: PROXY_ADDRESS_FORWARDING
           value: "true"
-        - name: DB_VENDOR
-          value: "postgres"
-        - name: DB_ADDR
-          value: "acid-minimal-cluster:5432"
-        - name: DB_DATABASE
-          value: "keycloak"
-        - name: DB_USER
+        - name: KC_DB_USERNAME
           valueFrom:
             secretKeyRef:
               name: keycloak.acid-minimal-cluster.credentials.postgresql.acid.zalan.do
               key: username
-        - name: DB_PASSWORD
+        - name: KC_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: keycloak.acid-minimal-cluster.credentials.postgresql.acid.zalan.do
               key: password
         volumeMounts:
-        - mountPath: /opt/jboss/keycloak/standalone/deployments/
+        - mountPath: /opt/keycloak/providers/
           name: deployments
         ports:
         - name: http
@@ -59,7 +74,7 @@ spec:
           containerPort: 8443
         readinessProbe:
           httpGet:
-            path: /auth/realms/master
+            path: /health
             port: 8080
       volumes:
       - name: deployments
