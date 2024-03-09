@@ -1,11 +1,11 @@
 apiVersion: v2
-name: starboard
-description: Starboard Security Scanner
+name: trivy-operator
+description: Trivy Operator Security Scanner
 type: application
 version: 0.1.0
 appVersion: "1.0"
 
 dependencies:
-- name: starboard-operator
-  version: 0.8.1
+- name: trivy-operator
+  version: 0.20.6
   repository: https://aquasecurity.github.io/helm-charts/

@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: starboard
+  name: trivy-operator
   namespace: argocd
 spec:
   destination:
-    namespace: starboard
+    namespace: trivy-operator
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: applications/starboard
+    path: applications/trivy-operator
     repoURL: https://github.com/dgo19/k3s-demo.git
     targetRevision: HEAD
   syncPolicy:
