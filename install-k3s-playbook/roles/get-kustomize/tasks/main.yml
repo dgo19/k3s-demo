@@ -12,7 +12,7 @@
 
 - name: register kustomize version
   set_fact:
-    kustomize_bin_version: "{{ kustomize_bin_v.stdout | regex_search('Version:kustomize\/(v[0-9.]+) ','\\1') | first }}"
+    kustomize_bin_version: "{{ kustomize_bin_v.stdout | regex_search('(v[0-9.]+) ?','\\1') | first }}"
   when: kustomize_bin.stat.exists == true and kustomize_bin_v | length > 0
 
 - debug:
