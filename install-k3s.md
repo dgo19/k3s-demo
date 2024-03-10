@@ -160,17 +160,17 @@ Installed:
 Complete!
 ```
 ## Fedora prerequisites
-Disbale firewalld as described in k3s documentation.
+Disable firewalld as described in k3s documentation.
 ```
 $ systemctl disable firewalld --now
 ```
 ## Installation of k3s
 We install a specific version of k3s. It has been tested for this demo. You can install the latest version by omitting the INSTALL_K3s_VERSION variable or choose a version.
 ```
-$ curl -sfL https://get.k3s.io | sudo INSTALL_K3S_VERSION="v1.26.3+k3s1" INSTALL_K3S_EXEC="server --disable traefik --disable servicelb" sh -
-[INFO]  Using v1.26.3+k3s1 as release
-[INFO]  Downloading hash https://github.com/k3s-io/k3s/releases/download/v1.26.3+k3s1/sha256sum-amd64.txt
-[INFO]  Downloading binary https://github.com/k3s-io/k3s/releases/download/v1.26.3+k3s1/k3s
+$ curl -sfL https://get.k3s.io | sudo INSTALL_K3S_VERSION="v1.28.7+k3s1" INSTALL_K3S_EXEC="server --disable traefik --disable servicelb" sh -
+[INFO]  Using v1.28.7+k3s1 as release
+[INFO]  Downloading hash https://github.com/k3s-io/k3s/releases/download/v1.28.7+k3s1/sha256sum-amd64.txt
+[INFO]  Downloading binary https://github.com/k3s-io/k3s/releases/download/v1.28.7+k3s1/k3s
 [INFO]  Verifying binary download
 [INFO]  Installing k3s to /usr/local/bin/k3s
 [INFO]  Skipping installation of SELinux RPM
