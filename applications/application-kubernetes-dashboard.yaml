@@ -14,7 +14,6 @@ spec:
     path: applications/kubernetes-dashboard
     repoURL: https://github.com/dgo19/k3s-demo.git
     targetRevision: HEAD
-  syncPolicy: {}
   ignoreDifferences:
   - name: kubernetes-dashboard-csrf
     kind: Secret

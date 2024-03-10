@@ -14,4 +14,3 @@ spec:
     path: applications/istio-bookinfo
     repoURL: https://github.com/dgo19/k3s-demo.git
     targetRevision: HEAD
-  syncPolicy: {}

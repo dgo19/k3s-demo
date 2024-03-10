@@ -12,4 +12,3 @@ spec:
     path: applications/configmaps
     repoURL: https://github.com/dgo19/k3s-demo.git
     targetRevision: HEAD
-  syncPolicy: {}
