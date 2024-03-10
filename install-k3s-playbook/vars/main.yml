@@ -1,6 +1,6 @@
 ---
 k3s_version: v1.28.7+k3s1
-kubeseal_version: 0.19.2
+kubeseal_version: 0.26.0
 kustomize_version: v4.5.5
 helm_version: v3.9.0
 argocd_version: v2.6.7
