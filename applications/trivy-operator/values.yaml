@@ -1,1 +1,10 @@
-#trivy-operator:
+trivy-operator:
+  operator:
+    scanJobsConcurrentLimit: 5
+    serviceMonitor:
+      enabled: false
+  trivy:
+    resources:
+      requests:
+        cpu: 1000m
+        memory: 100M
