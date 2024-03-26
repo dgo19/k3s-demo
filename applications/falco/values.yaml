@@ -1,0 +1,9 @@
+---
+falco:
+  driver:
+    enabled: true
+    kind: modern_ebpf
+  collectors:
+    kubernetes:
+      enabled: true
+

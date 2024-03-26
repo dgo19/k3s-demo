@@ -1,0 +1,11 @@
+apiVersion: v2
+name: loki
+description: Falco Security
+type: application
+version: 0.1.0
+appVersion: "1.0"
+
+dependencies:
+- name: falco
+  version: 4.2.5
+  repository: https://falcosecurity.github.io/charts
