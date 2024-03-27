@@ -4,6 +4,8 @@ global:
 gateway:
   name: "istio-ingressgateway"
   replicaCount: 1
+  annotations:
+    argocd.argoproj.io/sync-wave: "50"
   service:
     # Type of service. Set to "None" to disable the service entirely
     type: NodePort

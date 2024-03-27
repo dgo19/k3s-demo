@@ -1,7 +1,0 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "50"
-  name: istio-ingressgateway
-  namespace: istio-system
