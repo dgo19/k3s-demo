@@ -3,8 +3,6 @@ kind: Kustomization
 
 namespace: istio-system
 
-bases:
-  - https://raw.githubusercontent.com/istio/istio/1.17.2/samples/addons/jaeger.yaml
-
 resources:
+  - https://raw.githubusercontent.com/istio/istio/1.21.0/samples/addons/jaeger.yaml
   - ingress-jaeger.yaml
