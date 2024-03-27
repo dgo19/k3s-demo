@@ -5,5 +5,5 @@ namespace: istio-bookinfo
 
 resources:
   - namespace-istio-bookinfo.yaml
-  - https://raw.githubusercontent.com/istio/istio/release-1.12/samples/bookinfo/platform/kube/bookinfo.yaml
-  - https://raw.githubusercontent.com/istio/istio/release-1.12/samples/bookinfo/networking/bookinfo-gateway.yaml
+  - https://raw.githubusercontent.com/istio/istio/1.21.0/samples/bookinfo/platform/kube/bookinfo.yaml
+  - https://raw.githubusercontent.com/istio/istio/1.21.0/samples/bookinfo/networking/bookinfo-gateway.yaml
